@@ -1,0 +1,12 @@
+{
+  "name": "firebased-scripts",
+  "version": "1.0.0",
+  "description": "maint scripts to help developers work with data in firebase apps",
+  "main": "index.js",
+  "dependencies": {
+    "bluebird": "^3.5.3",
+    "chalk": "^2.4.1",
+    "airtable": "^0.5.8",
+    "firebase-admin": "^6.3.0"
+  }
+}
