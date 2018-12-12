@@ -74,7 +74,7 @@ npm run clean
 Clone from Bitbucket repo
 
 ```
-git remote add bitbucket git@bitbucket.org:mobileflowllc/mf-next-fire-ant.git
+git remote add bitbucket git@bitbucket.org:mobileflowllc/jpvcdb.git
 git push -u bitbucket master
 ```
 </details>
@@ -107,8 +107,10 @@ The directory structure in the `src/app` folder is as follows:
 | |____Banner.js
 |____next.config.js
 |____components
-| |____Header.js
 | |____App.js
+| |____Header.js
+| |____Home.js
+| |____Login.js
 |____asserts
 | |____styles.less
 | |____antd-custom.less
