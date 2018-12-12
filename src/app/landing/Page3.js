@@ -9,6 +9,12 @@ const Page3Container = styled.div`
   margin-bottom: 30px;
   background-color: #f8f9fa;
 `
+const PageHeader = styled.h1`
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  `
+
 
 export default function Page3({ isMobile }) {
 
@@ -82,7 +88,7 @@ export default function Page3({ isMobile }) {
 
   return (
     <Page3Container>
-      <h1>Page Three</h1> 
+      <PageHeader>Page Three</PageHeader> 
       <Row type="flex" justify="space-around" align="middle">
         <Col span={18}>
 

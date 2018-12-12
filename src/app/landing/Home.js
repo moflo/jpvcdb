@@ -9,6 +9,7 @@ import Page3 from './Page3';
 // import Page4 from './Page4';
 import Footer from './Footer';
 import './static/style';
+import styled from 'styled-components';
 
 let isMobile = false;
 // enquireScreen((b) => {

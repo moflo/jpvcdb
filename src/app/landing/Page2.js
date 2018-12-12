@@ -8,6 +8,11 @@ const Page2Container = styled.div`
   margin-bottom: 30px;
 `
 
+const PageHeader = styled.h1`
+    text-align: center;
+`
+
+
 export default function Page2({ isMobile }) {
 
   const DemoBox = props => <Card title={`Title: ${props.title}`}>{props.children}</Card>;
@@ -73,7 +78,7 @@ export default function Page2({ isMobile }) {
   
   return (
     <Page2Container>
-      <h1>Page Two</h1> 
+      <PageHeader>Page Two</PageHeader> 
       <Row type="flex" justify="space-around" align="top">
         <Col span={5}><DemoBox title="Testing2">
         <Table columns={columns} dataSource={data} showHeader={false} size="small" pagination={false} bordered={false}/>

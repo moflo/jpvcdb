@@ -8,6 +8,11 @@ const Page1Container = styled.div`
   padding-bottom: 30px;
   background-color: #f8f9fa;
 `
+const PageHeader = styled.h1`
+    text-align: center;
+    padding-bottom: 30px;
+`
+
 
 export default function Page1({ isMobile }) {
 
@@ -15,7 +20,7 @@ export default function Page1({ isMobile }) {
 
   return (
     <Page1Container>
-      <h1>Page One</h1> 
+      <PageHeader>Page One</PageHeader> 
       <Row type="flex" justify="space-around" align="middle">
         <Col span={4}><DemoBox value={300}>col-4</DemoBox></Col>
         <Col span={4}><DemoBox value={250}>col-4</DemoBox></Col>
