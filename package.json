@@ -1,0 +1,42 @@
+{
+  "name": "with-firebase-hosting",
+  "version": "4.0.1",
+  "description": "Host Next.js SSR app on Firebase Cloud Functions with Firebase Hosting redirects.",
+  "scripts": {
+    "dev": "next \"src/app/\"",
+    "preserve": "npm run build-public && npm run build-funcs && npm run build-app && npm run copy-deps && npm run install-deps",
+    "serve": "NODE_ENV=production firebase serve",
+    "predeploy": "npm run build-public && npm run build-funcs && npm run build-app && npm run copy-deps",
+    "deploy": "firebase deploy",
+    "clean": "rimraf \"dist/functions/**\" && rimraf \"dist/public\"",
+    "build-public": "cpx \"src/public/**/*.*\" \"dist/public\" -C && cpx \"src/app/static/*.*\" \"dist/public/static\" -C ",
+    "build-funcs": "babel \"src/functions\" --out-dir \"dist/functions\"",
+    "build-app": "next build \"src/app/\"",
+    "copy-deps": "cpx \"*{package.json,package-lock.json,yarn.lock}\" \"dist/functions\" -C",
+    "install-deps": "cd \"dist/functions\" && npm i"
+  },
+  "dependencies": {
+    "@zeit/next-less": "^1.0.1",
+    "antd": "^3.5.4",
+    "babel-plugin-import": "^1.7.0",
+    "firebase": "^5.6.0",
+    "firebase-admin": "^6.3.0",
+    "firebase-functions": "^2.1.0",
+    "less": "3.0.4",
+    "less-vars-to-js": "1.3.0",
+    "next": "7.0.2",
+    "next-seo": "^1.2.0",
+    "react": "16.6.3",
+    "react-dom": "16.6.3",
+    "styled-components": "^4.1.1",
+    "prop-types": "15.6.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-rc.1",
+    "cpx": "1.5.0",
+    "firebase-tools": "6.1.2",
+    "prettier": "1.12.1",
+    "rimraf": "2.6.2",
+    "@babel/plugin-proposal-decorators": "^7.1.0"
+  }
+}
