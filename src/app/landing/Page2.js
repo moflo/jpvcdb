@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Router from "next/router";
 import { Card, Row, Col, Table, Tag } from 'antd';
 import styled from 'styled-components';
 import dynamic from 'next/dynamic'
@@ -34,7 +35,13 @@ export default function Page2({ isMobile }) {
       </span>
     ),
   }];
-  
+
+  const onRowSelect = record => {
+    // console.log("Select record ", record)
+    // redirect('/cohort/testing','/cohort?id=testing')
+    Router.push('/cohort?id=testing','/cohort/testing')
+  }
+
   const data = [{
     key: '1',
     name: 'John Brown',
@@ -85,11 +92,27 @@ export default function Page2({ isMobile }) {
       <PageHeader>Page Two</PageHeader> 
       <Row type="flex" justify="space-around" align="top">
         <Col span={5}><DemoBox title="Testing2">
-        <Table columns={columns} dataSource={data} showHeader={false} size="small" pagination={false} bordered={false}/>
+          <Table 
+            columns={columns} 
+            dataSource={data} 
+            onRow={(record) => ({ onClick: () => { onRowSelect(record); } })}
+            showHeader={false} 
+            size="small" 
+            pagination={false} 
+            bordered={false}
+            />
         </DemoBox></Col>
         <Col span={5}>
             <h2>Testing 3</h2>
-            <Table columns={columns} dataSource={data} showHeader={false} size="small" pagination={false} bordered={false}/>
+            <Table 
+              columns={columns} 
+              dataSource={data} 
+              onRow={(record) => ({ onClick: () => { onRowSelect(record); } })}
+              showHeader={false} 
+              size="small" 
+              pagination={false} 
+              bordered={false}
+              />
         </Col>
         <Col span={5}><DemoBox title="Testing2">
         <Map />

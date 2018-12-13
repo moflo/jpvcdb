@@ -16,7 +16,7 @@ const PageHeader = styled.h1`
   `
 
 
-export default function Page3({ isMobile }) {
+export default function Page3({ isMobile, batch }) {
 
     const onRowSelect = record => {
         console.log("Select record ", record)
@@ -53,7 +53,9 @@ export default function Page3({ isMobile }) {
         render: ((tag) => <Tag color={colorForStatus(tag)} key={tag} >{tag.toUpperCase()}</Tag>)
     }];
   
-    var filter = ['batch', '==', 'W18']
+    const batchFilter = batch || 'W18'
+
+    var filter = ['batch', '==', batchFilter]
 
     const TabPane = Tabs.TabPane
 
@@ -88,7 +90,7 @@ export default function Page3({ isMobile }) {
 
   return (
     <Page3Container>
-      <PageHeader>Page Three</PageHeader> 
+      <PageHeader>Page Three Batch {batchFilter}</PageHeader> 
       <Row type="flex" justify="space-around" align="middle">
         <Col span={18}>
 
