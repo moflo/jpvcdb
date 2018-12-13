@@ -93,7 +93,7 @@ export default function Page2({ isMobile }) {
             <Table columns={columns} dataSource={data} showHeader={false} size="small" pagination={false} bordered={false}/>
         </Col>
         <Col span={5}><DemoBox title="Testing2">
-        <Map />
+          <Map />
         </DemoBox></Col>
       </Row>
     </Page2Container>
