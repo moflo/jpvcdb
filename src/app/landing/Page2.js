@@ -7,7 +7,6 @@ const Map = dynamic(() => import('./Map.js'), {
   ssr: false
 });
 
-
 const Page2Container = styled.div`
   margin-top: 30px;
   margin-bottom: 30px;
@@ -93,7 +92,7 @@ export default function Page2({ isMobile }) {
             <Table columns={columns} dataSource={data} showHeader={false} size="small" pagination={false} bordered={false}/>
         </Col>
         <Col span={5}><DemoBox title="Testing2">
-          <Map />
+        <Map />
         </DemoBox></Col>
       </Row>
     </Page2Container>
