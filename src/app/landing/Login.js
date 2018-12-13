@@ -44,9 +44,9 @@ const FormItem = Form.Item;
 
 class LoginForm extends React.Component {
 
-  static async getInitialProps () {
-    return {}
-  }
+  // static async getInitialProps () {
+  //   return {}
+  // }
 
   handleSubmit = (e) => {
     e.preventDefault();

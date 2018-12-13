@@ -20,8 +20,9 @@ class Dashboard extends React.Component {
         selectedMenu: '1'
     }
     
-    static async getInitialProps(ctx) {
-        if (redirectIfNotAuthenticated(ctx)) {
+    // static async getInitialProps(ctx) {
+    static getInitialProps(ctx) {
+            if (redirectIfNotAuthenticated(ctx)) {
             return {};
         }
 
