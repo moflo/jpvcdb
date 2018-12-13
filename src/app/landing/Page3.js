@@ -50,12 +50,12 @@ export default function Page3({ isMobile }) {
         title: 'Status',
         dataIndex: 'status',
         key: 'status',
-        render: ((tag) => <Tag color={colorForStatus(tag)} key={tag} >{tag}</Tag>)
+        render: ((tag) => <Tag color={colorForStatus(tag)} key={tag} >{tag.toUpperCase()}</Tag>)
     }];
   
     var filter = ['batch', '==', 'W18']
 
-    const TabPane = Tabs.TabPane;
+    const TabPane = Tabs.TabPane
 
     const QueryFilterTable = category => {
         var categoryFilter = filter
@@ -95,8 +95,9 @@ export default function Page3({ isMobile }) {
         <Tabs
           defaultActiveKey="1"
           tabPosition="left"
-          tabBarStyle={{ color: "#00f" }}
+          tabBarStyle={{ color: "#00f", backgroundColor: "#fff", paddingTop: 0, paddingBottom: 0 }}
         //   style={{ height: 220 }}
+          size="small"
         >
           <TabPane tab={<span><Icon type="home" />All</span>} key="1">
             {QueryFilterTable("All")}

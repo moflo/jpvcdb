@@ -93,9 +93,9 @@ export default class Header extends React.Component {
         ) : null}
         <Row>
           <Col lg={4} md={5} sm={24} xs={24}>
-            <a id="logo">
+            <a id="logo" href="/">
               <img alt="logo" src="/static/logo-white.png" />
-              <span>JPVCDB</span>
+              <span>JP.VC.DB</span>
             </a>
           </Col>
           <Col lg={20} md={19} sm={0} xs={0}>

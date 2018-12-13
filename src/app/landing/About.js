@@ -20,7 +20,7 @@ class AboutText extends React.Component {
             <Sider style={{ background: '#aaa' }}>
             <Menu theme="light" defaultSelectedKeys={['1']} mode="inline" onClick={this.headerMenuOnClick} >
                 <Menu.Item key="1">
-                <Icon type="info" />
+                <Icon type="info-circle" />
                 <span>About</span>
                 </Menu.Item>
             </Menu>
