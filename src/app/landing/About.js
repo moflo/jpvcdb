@@ -71,8 +71,8 @@ class About extends React.PureComponent {
     return (
       [
         <Header key="header" isFirstScreen={this.state.isFirstScreen} isMobile={this.state.isMobile} selectedMenu="about" />,
-        <div style={{ padding: 0, background: '#aaa', minHeight: 80 }} />,
-        <AboutText />
+        <div key="banner" style={{ padding: 0, background: '#aaa', minHeight: 80 }} />,
+        <AboutText key="about" />
         ]
     );
   }

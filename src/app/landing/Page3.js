@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Link from 'next/link'
 import { Tabs, Row, Col, Table, Tag, Icon } from 'antd';
 import DBQueryProvider from '../components/DBQueryProvider';
 import styled from 'styled-components';
@@ -33,7 +34,7 @@ export default function Page3({ isMobile, batch }) {
         title: 'Name',
         dataIndex: 'Name',
         key: 'name',
-        render: ((text) => <a href={`/company/`+text} target="_blank" rel="noopener noreferrer">{text}</a>),
+        render: ((text) => <Link href={`/company?id=`+text} as={`/company/`+text}><a>{text}</a></Link>),
     }, {
         title: 'Batch',
         dataIndex: 'batch',
@@ -77,7 +78,7 @@ export default function Page3({ isMobile, batch }) {
             dataSource={data} 
             rowKey={record => record.id}
             onRow={(record) => ({
-                onClick: () => { this.onRowSelect(record); }
+                onClick: () => { onRowSelect(record); }
             })}
             loading={isLoading} 
             pagination={true} />

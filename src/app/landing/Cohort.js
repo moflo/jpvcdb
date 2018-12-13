@@ -16,6 +16,7 @@ let isMobile = false;
 
 class Cohort extends React.PureComponent {
   state = {
+    id: this.props.id,
     isFirstScreen: true,
     isMobile,
   };
@@ -33,12 +34,16 @@ class Cohort extends React.PureComponent {
       isFirstScreen: mode === 'enter',
     });
   }
+
   render() {
+
+    const batch = this.props.id || 'W17'
+
     return (
       [
         <Header key="header" isFirstScreen={this.state.isFirstScreen} isMobile={this.state.isMobile} />,
-        <Banner />,
-        <Page3 key="page3" isMobile={this.state.isMobile} batch='S18'/>,
+        <Banner key="banner" />,
+        <Page3 key="page3" isMobile={this.state.isMobile} batch={batch}/>,
         <Footer key="footer" />
       ]
     );

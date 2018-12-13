@@ -23,6 +23,7 @@ let isMobile = false;
 
 class Company extends React.PureComponent {
   state = {
+    id: this.props.id,
     isFirstScreen: true,
     isMobile,
   };
@@ -40,12 +41,13 @@ class Company extends React.PureComponent {
       isFirstScreen: mode === 'enter',
     });
   }
+
   render() {
     return (
       [
         <Header key="header" isFirstScreen={this.state.isFirstScreen} isMobile={this.state.isMobile} />,
-        <Banner />,
-        <DebugTitle>Company Page</DebugTitle>,
+        <Banner key="banner" />,
+        <DebugTitle key="title" >Company Page {this.state.id}</DebugTitle>,
         <Footer key="footer" />
       ]
     );

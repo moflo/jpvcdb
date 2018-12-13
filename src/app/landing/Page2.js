@@ -39,7 +39,7 @@ export default function Page2({ isMobile }) {
   const onRowSelect = record => {
     // console.log("Select record ", record)
     // redirect('/cohort/testing','/cohort?id=testing')
-    Router.push('/cohort?id=testing','/cohort/testing')
+    Router.push('/cohort?id=W18','/cohort/W18')
   }
 
   const data = [{
