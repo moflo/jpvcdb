@@ -1,0 +1,104 @@
+[
+    {
+      "id": "10-by-10",
+      "name": "10 By 10",
+      "batch": "S17",
+      "description": "10 By 10",
+      "category": "Other SaaS",
+      "employees": 1,
+      "hqLocation": "",
+      "founderBackground": [
+        
+      ],
+      "links": 0,
+      "exit": 0,
+      "twitter": 0,
+      "alexa": 1988722,
+      "growth": 0,
+      "founderCount": 1,
+      "facebook": 0,
+      "domains": 0,
+      "logo": "",
+      "fundingString": "$0.1m",
+      "www": "http://www.10by10.io",
+      "address": "",
+      "funding": 0.1,
+      "status": "Live",
+      "linkedin": 0,
+      "ticker": "",
+      "landingpage": "",
+      "tweets": 0,
+      "createdAt": {
+        "_seconds": 1544759392,
+        "_nanoseconds": 412000000
+      }
+    },
+    {
+      "id": "1000memories",
+      "name": "1000Memories",
+      "batch": "S10",
+      "description": "1000Memories",
+      "category": "Consumer",
+      "employees": 1,
+      "www": "http://www.ancestry.com",
+      "address": "",
+      "funding": 333.2,
+      "status": "Exited",
+      "linkedin": 0,
+      "ticker": "",
+      "landingpage": "",
+      "tweets": 0,
+      "hqLocation": "",
+      "founderBackground": [
+        
+      ],
+      "links": 0,
+      "exit": 0,
+      "twitter": 0,
+      "alexa": 1082,
+      "growth": 0,
+      "founderCount": 1,
+      "facebook": 0,
+      "domains": 0,
+      "logo": "1,342",
+      "fundingString": "$333.2m",
+      "createdAt": {
+        "_seconds": 1544759392,
+        "_nanoseconds": 418000000
+      }
+    },
+    {
+      "id": "airbnb",
+      "name": "Airbnb",
+      "batch": "W09",
+      "description": "Airbnb",
+      "category": "Consumer",
+      "exit": 0,
+      "twitter": 0,
+      "alexa": 343,
+      "growth": 0,
+      "founderCount": 1,
+      "facebook": 0,
+      "domains": 0,
+      "logo": "6,100",
+      "fundingString": "$6,000.3m",
+      "www": "http://www.airbnb.com",
+      "address": "",
+      "funding": 6000.3,
+      "status": "Live",
+      "linkedin": 0,
+      "ticker": "",
+      "landingpage": "",
+      "tweets": 0,
+      "employees": 1,
+      "hqLocation": "",
+      "founderBackground": [
+        
+      ],
+      "links": 0,
+      "createdAt": {
+        "_seconds": 1544759396,
+        "_nanoseconds": 228000000
+      }
+    }
+  ]
