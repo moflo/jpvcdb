@@ -3,7 +3,7 @@ JP.VC.DB
 
 ### MobileFlow Next Firebase Ant Design Template
 
-An 'open source' clone the very popular [ycdb](https://ycdb.co) and extends it for other organizations or, in
+An open source clone the very popular [ycdb](https://ycdb.co) and extends it for other organizations or, in
 this case, whole countries. SEO optimized, performant, opinionated React/Next/AntDesign/Firebase template 
 app with fast loading landing page with lazy-loading of Firebase data using a simple provider class.
 
