@@ -3,7 +3,7 @@ import React from 'react';
 // import { enquireScreen } from 'enquire-js';
 import Header from './Header';
 import Banner from './Banner';
-import Page3 from './Page3';
+import RankingTable from './RankingTable';
 // import Page4 from './Page4';
 import Footer from './Footer';
 import './static/style';
@@ -43,7 +43,7 @@ class Ranking extends React.PureComponent {
       [
         <Header key="header" isFirstScreen={this.state.isFirstScreen} isMobile={this.state.isMobile} />,
         <Banner key="banner" />,
-        <Page3 key="page3" isMobile={this.state.isMobile} batch={batch}/>,
+        <RankingTable key="ranking" isMobile={this.state.isMobile} batch={batch}/>,
         <Footer key="footer" />
       ]
     );

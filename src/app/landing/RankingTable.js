@@ -5,7 +5,7 @@ import { Tabs, Row, Col, Table, Tag, Icon } from 'antd';
 import DBQueryProvider from '../components/DBQueryProvider';
 import styled from 'styled-components';
 
-const Page3Container = styled.div`
+const RankingTableContainer = styled.div`
   margin-top: 30px;
   margin-bottom: 30px;
   background-color: #f8f9fa;
@@ -17,7 +17,7 @@ const PageHeader = styled.h1`
   `
 
 
-export default function Page3({ isMobile, batch }) {
+export default function RankingTable({ isMobile, batch }) {
 
     const onRowSelect = record => {
         console.log("Select record ", record)
@@ -90,7 +90,7 @@ export default function Page3({ isMobile, batch }) {
     }
 
   return (
-    <Page3Container>
+    <RankingTableContainer>
       <PageHeader>Page Three Batch {batchFilter}</PageHeader> 
       <Row type="flex" justify="space-around" align="middle">
         <Col span={18}>
@@ -178,9 +178,9 @@ export default function Page3({ isMobile, batch }) {
             
         </Col>
       </Row>
-    </Page3Container>
+    </RankingTableContainer>
     );
 }
-Page3.propTypes = {
+RankingTable.propTypes = {
   isMobile: PropTypes.bool,
 };

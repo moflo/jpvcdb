@@ -11,17 +11,17 @@ admin.initializeApp({
 const db = require('firebase-admin').firestore()
 db.settings({timestampsInSnapshots: true})  // Using Timestamps
 
-console.log(chalk.blue(`Making all post titles UPPERCASE...`))
+console.log(chalk.blue(`Making all company funding numerical...`))
 
 // if you're collection is big, you might want to paginate the query
 // so you don't download the entire thing at once:
 // https://firebase.google.com/docs/firestore/query-data/query-cursors
 // TODO - show an example?
-db.collection('posts').get()
+db.collection('companies').get()
   .then(snap => {
     // Bluebird Promises lets you limit promises running at once:
     // http://bluebirdjs.com/docs/api/promise.map.html
-    return Promise.map(snap.docs, updatePost, {concurrency: 5})
+    return Promise.map(snap.docs, updateCompany, {concurrency: 5})
   })
   .then( () => {
     console.log(chalk.green(`✅ done!`))
@@ -30,11 +30,20 @@ db.collection('posts').get()
     console.log(chalk.red(`⚠️ migration error: `), error)
   })
 
-const updatePost = doc => {
-  console.log(`  migrating post ${doc.id}...`)
-  return db.collection('posts')
+const updateCompany = doc => {
+  console.log(`  migrating company ${doc.id}...`)
+
+  let fundingString = doc.data().fundingString || "0.0"
+  let fundingClean = fundingString.replace(/\$/g, '')
+  let fundingFloat = parseFloat(fundingClean)
+  let funding = Number(fundingFloat)
+
+
+  // console.log(`   ${fundingString} -> ${funding}}`)
+
+  return db.collection('companies')
     .doc(doc.id)
     .update({
-      title: doc.data().title.toUpperCase(),
+      funding
     })
 }
