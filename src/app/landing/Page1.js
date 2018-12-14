@@ -58,24 +58,24 @@ export default function Page1({ isMobile }) {
     <Page1Container>
       <PageHeader>Page One</PageHeader> 
       <Row type="flex" justify="space-around" align="middle">
-        <Col span={4}><DemoMeta title="Card Title" info="Card description text" link="ranking100" icon="dashboard">col-4</DemoMeta></Col>
-        <Col span={4}><DemoMeta title="Card Title" info="Card description text" link="ranking100" icon="dashboard">col-4</DemoMeta></Col>
-        <Col span={4}><DemoMeta title="Card Title" info="Card description text" link="ranking100" icon="dashboard">col-4</DemoMeta></Col>
-        <Col span={4}><DemoMeta title="Card Title" info="Card description text" link="ranking100" icon="dashboard">col-4</DemoMeta></Col>
+        <Col span={4}><DemoMeta title="Card Title" info="Card description text" link="funding" icon="dashboard">col-4</DemoMeta></Col>
+        <Col span={4}><DemoMeta title="Card Title" info="Card description text" link="funding" icon="dashboard">col-4</DemoMeta></Col>
+        <Col span={4}><DemoMeta title="Card Title" info="Card description text" link="funding" icon="dashboard">col-4</DemoMeta></Col>
+        <Col span={4}><DemoMeta title="Card Title" info="Card description text" link="funding" icon="dashboard">col-4</DemoMeta></Col>
       </Row>
       <br />
       <Row type="flex" justify="space-around" align="middle">
-        <Col span={4}><DemoMetaAction title="Card Title" info="Card description text" link="ranking100" icon="dashboard">col-4</DemoMetaAction></Col>
-        <Col span={4}><DemoMetaAction title="Card Title" info="Card description text" link="ranking100" icon="dashboard">col-4</DemoMetaAction></Col>
-        <Col span={4}><DemoMetaAction title="Card Title" info="Card description text" link="ranking100" icon="dashboard">col-4</DemoMetaAction></Col>
-        <Col span={4}><DemoMetaAction title="Card Title" info="Card description text" link="ranking100" icon="dashboard">col-4</DemoMetaAction></Col>
+        <Col span={4}><DemoMetaAction title="Card Title" info="Card description text" link="funding" icon="dashboard">col-4</DemoMetaAction></Col>
+        <Col span={4}><DemoMetaAction title="Card Title" info="Card description text" link="funding" icon="dashboard">col-4</DemoMetaAction></Col>
+        <Col span={4}><DemoMetaAction title="Card Title" info="Card description text" link="funding" icon="dashboard">col-4</DemoMetaAction></Col>
+        <Col span={4}><DemoMetaAction title="Card Title" info="Card description text" link="funding" icon="dashboard">col-4</DemoMetaAction></Col>
       </Row>
       <br />
       <Row type="flex" justify="space-around" align="middle">
-        <Col span={4}><DemoBox title="Card Title" info="Card description text" link="ranking100" icon="dashboard">col-4</DemoBox></Col>
-        <Col span={4}><DemoBox title="Card Title" info="Card description text" link="ranking100" icon="dashboard">col-4</DemoBox></Col>
-        <Col span={4}><DemoBox title="Card Title" info="Card description text" link="ranking100" icon="dashboard">col-4</DemoBox></Col>
-        <Col span={4}><DemoBox title="Card Title" info="Card description text" link="ranking100" icon="dashboard">col-4</DemoBox></Col>
+        <Col span={4}><DemoBox title="Card Title" info="Card description text" link="funding" icon="dashboard">col-4</DemoBox></Col>
+        <Col span={4}><DemoBox title="Card Title" info="Card description text" link="funding" icon="dashboard">col-4</DemoBox></Col>
+        <Col span={4}><DemoBox title="Card Title" info="Card description text" link="funding" icon="dashboard">col-4</DemoBox></Col>
+        <Col span={4}><DemoBox title="Card Title" info="Card description text" link="funding" icon="dashboard">col-4</DemoBox></Col>
       </Row>
     </Page1Container>
     );

@@ -37,13 +37,13 @@ class Ranking extends React.PureComponent {
 
   render() {
 
-    const batch = this.props.id || 'W17'
+    const sort = this.props.id || 'funding'
 
     return (
       [
         <Header key="header" isFirstScreen={this.state.isFirstScreen} isMobile={this.state.isMobile} />,
         <Banner key="banner" />,
-        <RankingTable key="ranking" isMobile={this.state.isMobile} batch={batch}/>,
+        <RankingTable key="ranking" isMobile={this.state.isMobile} sort={sort}/>,
         <Footer key="footer" />
       ]
     );
