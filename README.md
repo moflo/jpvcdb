@@ -1,9 +1,14 @@
-MobileFlow Next Firebase Ant Design Template
-============================================
+JP.VC.DB
+========
 
+### MobileFlow Next Firebase Ant Design Template
 
-SEO optimized, performant, opinionated React/Next/AntDesign/Firebase template app. With fast loading landing page
-with lazy-loading of Firebase during app login process.
+An 'open source' clone the very popular [ycdb](https://ycdb.co) and extends it for other organizations or, in
+this case, whole countries. SEO optimized, performant, opinionated React/Next/AntDesign/Firebase template 
+app with fast loading landing page with lazy-loading of Firebase data using a simple provider class.
+
+With code and inspiration from Sam Lolla [Firefly](http://getfirefly.org/) and [react-firestore](https://github.com/green-arrow/react-firestore/blob/master/src/FirestoreCollection.js), with design support from [ManyPixkes](https://manypixels.co/).
+
 
 Based on `create-next-app` and initially built using `with-firebase-hosting`
 
@@ -88,14 +93,22 @@ Using Firebase hosting with NextJS generated SSR design files. This should allow
 
 ### Customization
 
-Ant Design themeing for both landing page and application controls. Use the (Ant Design)[https://ant.design/components] summary page and (style sheet guide)[https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less] to customize the look & feel.
+Ant Design themeing for both landing page and application controls. Use the [Ant Design](https://ant.design/components])summary page and [style sheet guide](https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less) to customize the look & feel.
 
 The directory structure in the `src/app` folder is as follows:
 
 ```bash
+|____pages
+| |____about.js
+| |____index.js
+| |____login.js
+| |____dashboard.js
+|____credentials
+| |____client.js
 |____landing
-| |____Header.js
 | |____Home.js
+| |____Header.js
+| |____Banner.js
 | |____Page1.js
 | |____static
 | | |____style.js
@@ -104,8 +117,6 @@ The directory structure in the `src/app` folder is as follows:
 | | |____footer.less
 | | |____header.less
 | | |____responsive.less
-| |____Banner.js
-|____next.config.js
 |____components
 | |____App.js
 | |____Header.js
@@ -120,15 +131,9 @@ The directory structure in the `src/app` folder is as follows:
 | |____redirect.js
 | |____auth.js
 | |____firebaseManager.js
-|____api
+|____next.config.js
 |____next-seo.config.js
-|____pages
-| |____about.js
-| |____index.js
-| |____login.js
-| |____dashboard.js
-|____credentials
-| |____client.js
+|____scripts
 ```
 
 
@@ -136,7 +141,7 @@ The Firebase configuration is contained in `credentials/client.js` and is used t
 
 The home / landing page is `index.js` by default, and loads an Ant Design stylized landing page from `landing/Home.js` with custom `less` styling from within the `landing/static` directory.
 
-The application page is `dashboard` and contains custom application components from the `components` directory.
+The application page is `dashboard` and contains custom application components from the `components` directory. Current functionality is limited to allowing admins to create and edit company data. Extensive use of Firebase admin scripts is made to migrate and shape data. See the `scripts` directory.
 
 Both the application and landing page use the `@zeit/next-less` loading methods as specified within `next.config.js` file, which loads the default Ant Design style sheets and applies overrides using the files contained within `asserts/antd-custom.less`.
 
