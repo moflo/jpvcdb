@@ -213,7 +213,7 @@ class RankingTable extends React.PureComponent {
         <RankingTableContainer>
         <PageHeader>
             <span>Top 100 Companies By </span>
-            <Select labelInValue defaultValue={{ key: 'funding' }} style={{ width: 220 }} onChange={this.handleMenuChange}>
+            <Select labelInValue defaultValue={{ key: sorttype }} style={{ width: 220 }} onChange={this.handleMenuChange}>
                 <Option value="funding"><Icon type="pay-circle" />  Funding</Option>
                 <Option value="exit"><Icon type="rocket" />  Exit Value</Option>
                 <Option value="employees"><Icon type="team" />  Employee Count</Option>
