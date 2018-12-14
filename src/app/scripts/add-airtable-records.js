@@ -12,7 +12,8 @@ admin.initializeApp({
 const db = require('firebase-admin').firestore()
 db.settings({timestampsInSnapshots: true})  // Using Timestamps
 
-var base = new Airtable({apiKey: 'key0pQbeY8C9YOiD7'}).base('apptJQ4wLSH4Q7TNM');
+const airTableAccount = require('../credentials/airTableKey.json')
+var base = new Airtable({apiKey: airTableAccount.apiKey}).base(airTableAccount.appKey);
 
 // add seed posts
 console.log(chalk.blue(`Adding seed post data...`))
