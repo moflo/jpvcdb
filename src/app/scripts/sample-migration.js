@@ -34,7 +34,7 @@ const updateCompany = doc => {
   console.log(`  migrating company ${doc.id}...`)
 
   let fundingString = doc.data().fundingString || "0.0"
-  let fundingClean = fundingString.replace(/\$/g, '')
+  let fundingClean = fundingString.replace(/\$|,|m/gi, '')
   let fundingFloat = parseFloat(fundingClean)
   let funding = Number(fundingFloat)
 
