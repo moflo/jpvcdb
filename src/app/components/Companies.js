@@ -2,14 +2,14 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Layout, Breadcrumb, Button, Table, Tabs, Card, Form, Input, Switch, Slider, Icon, notification } from 'antd';
 import styled from 'styled-components';
-import firebaseConfig from '../credentials/client';
+import DBQueryProvider from './DBQueryProvider';
 
 
 const { Content } = Layout;
 const FormItem  = Form.Item;
 const TabPane = Tabs.TabPane;
 
-class PageCreate extends React.Component {
+class CompanyCreate extends React.Component {
   state = {
     deploying: false,
     menuVisible: false,
@@ -54,7 +54,7 @@ class PageCreate extends React.Component {
         <Button key="back" size="large" icon="arrow-left" onClick={this.props.cancelCallback} style={{ marginBottom: 16}} >Cancel</Button>
 
         <div style={{ padding: 0, background: '#fff', minHeight: 360 }}>
-        <Card title="New Page" bordered={false} style={{ width: "100%"}} loading={false} >
+        <Card title="New Company" bordered={false} style={{ width: "100%"}} loading={false} >
             <Form onSubmit={this.handleSubmit}>
             <Tabs defaultActiveKey="1" >
                     <TabPane tab="Title" key="1">
@@ -63,7 +63,7 @@ class PageCreate extends React.Component {
                         {getFieldDecorator('title', {
                             rules: [{ required: true, message: 'Please input a title!' }],
                         })(
-                            <Input prefix={<Icon type="edit" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder=" New Page" />
+                            <Input prefix={<Icon type="edit" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder=" New Company" />
                         )}
                         </FormItem>
 
@@ -110,7 +110,7 @@ class PageCreate extends React.Component {
   }
 }
 
-export default class MFPages extends React.Component {
+export default class MFCompanies extends React.Component {
   state = {
     deploying: false,
     menuVisible: false,
@@ -135,9 +135,14 @@ export default class MFPages extends React.Component {
     });
   }
 
+
+  onRowSelect = record => {
+    console.log("Select record ", record)
+  }
+
   render() {
     const { deploying, loading } = this.state;
-    const WrappedPageCreate = Form.create()(PageCreate);
+    const WrappedCompanyCreate = Form.create()(CompanyCreate);
 
     const columns = [{
       title: 'Project ID',
@@ -167,18 +172,38 @@ export default class MFPages extends React.Component {
       <Content style={{ margin: '0 16px' }}>
         <Breadcrumb style={{ margin: '16px 0' }}>
         <Breadcrumb.Item>Home</Breadcrumb.Item>
-        <Breadcrumb.Item>Page</Breadcrumb.Item>
+        <Breadcrumb.Item>Company</Breadcrumb.Item>
         </Breadcrumb>
         {this.state.menuVisible ?
-         <WrappedPageCreate cancelCallback={this.handleHideMenu} />
+         <WrappedCompanyCreate cancelCallback={this.handleHideMenu} />
         :
         <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
         
           <div style={{textAlign: 'right'}} >
-          <Button type="secondary" size="large" icon="plus" onClick={this.handleShowMenu}> New Page </Button>
+          <Button type="secondary" size="large" icon="plus" onClick={this.handleShowMenu}> New Company </Button>
           </div>
           
-          <Table columns={columns} rowKey="uid1" dataSource={[firebaseConfig]} pagination={false} />
+          <DBQueryProvider path={'companies'} >
+
+          { ({error, isLoading, data}) => {
+          
+            if (error) { console.error("Error loading users ", error)}
+
+            return(
+                <Table 
+                columns={columns} 
+                dataSource={data} 
+                rowKey={record => record.id}
+                onRow={(record) => ({
+                  onClick: () => { this.onRowSelect(record); }
+                })}
+                loading={isLoading} 
+                pagination={true} />
+            )
+          }}
+
+          </DBQueryProvider>
+          
         </div>
         }
       </Content>
