@@ -30,11 +30,25 @@ export default function RankingTable({ isMobile, batch }) {
         return "gray"
     }
 
+    const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 1
+      });
+      
+    //   formatter.format(2500); /* $2,500.0 */
+      
     const columns = [{
         title: 'Name',
         dataIndex: 'name',
         key: 'name',
         render: ((text) => <Link href={`/company?id=`+text} as={`/company/`+text}><a>{text}</a></Link>),
+    }, {
+        title: 'Funding',
+        dataIndex: 'funding',
+        key: 'funding',
+        render: ((millions) => formatter.format(millions)+"MM"),
+        align: 'right'
     }, {
         title: 'Batch',
         dataIndex: 'batch',
@@ -66,7 +80,7 @@ export default function RankingTable({ isMobile, batch }) {
             categoryFilter = [filter,['category', '==', category]]
         }
         return (
-        <DBQueryProvider path={'companies'} filter={categoryFilter} sort="name">
+        <DBQueryProvider path={'companies'} limit={100} sort="funding:desc">
 
         { ({error, isLoading, data}) => {
 
