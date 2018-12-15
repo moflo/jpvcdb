@@ -56,7 +56,7 @@ export default function Page1({ isMobile }) {
 
   return (
     <Page1Container>
-      <PageHeader>Page One</PageHeader> 
+      <PageHeader>Top 100 Ranking</PageHeader> 
       <Row type="flex" justify="space-around" align="middle">
         <Col span={4}><DemoMeta title="Top Funded" info="Top 100 companies by funding" link="funding" icon="pay-circle">Funding</DemoMeta></Col>
         <Col span={4}><DemoMeta title="Top Exits" info="Top 100 companies by exit" link="exit" icon="rocket">Exit</DemoMeta></Col>

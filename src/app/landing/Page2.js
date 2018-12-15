@@ -89,10 +89,11 @@ export default function Page2({ isMobile }) {
 
   return (
     <Page2Container>
-      <PageHeader>Page Two</PageHeader> 
+      <PageHeader>Cohort Analysis</PageHeader> 
       <Row type="flex" justify="space-around" align="top">
-        <Col span={5}><DemoBox title="Testing2">
-          <Table 
+        <Col span={5}>
+          <h2>Funding by Cohort</h2>
+          <Table
             columns={columns} 
             dataSource={data} 
             onRow={(record) => ({ onClick: () => { onRowSelect(record); } })}
@@ -101,9 +102,9 @@ export default function Page2({ isMobile }) {
             pagination={false} 
             bordered={false}
             />
-        </DemoBox></Col>
+        </Col>
         <Col span={5}>
-            <h2>Testing 3</h2>
+            <h2>Status Outcome by Cohort</h2>
             <Table 
               columns={columns} 
               dataSource={data} 
@@ -114,9 +115,10 @@ export default function Page2({ isMobile }) {
               bordered={false}
               />
         </Col>
-        <Col span={5}><DemoBox title="Testing2">
-        <Map />
-        </DemoBox></Col>
+        <Col span={5}><DemoBox title="HQ Location">
+          <Map />
+          </DemoBox>
+        </Col>
       </Row>
     </Page2Container>
     );

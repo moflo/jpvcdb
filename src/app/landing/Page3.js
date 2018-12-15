@@ -91,7 +91,7 @@ export default function Page3({ isMobile, batch }) {
 
   return (
     <Page3Container>
-      <PageHeader>Page Three Batch {batchFilter}</PageHeader> 
+      <PageHeader>Recent Investment Cohort {batchFilter}</PageHeader> 
       <Row type="flex" justify="space-around" align="middle">
         <Col span={18}>
 
