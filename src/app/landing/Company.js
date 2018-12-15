@@ -4,7 +4,6 @@ import React from 'react';
 import Header from './Header';
 import Banner from './Banner';
 import CompanyHead from './CompanyHead';
-// import Page4 from './Page4';
 import Footer from './Footer';
 import './static/style';
 import styled from 'styled-components';
@@ -47,7 +46,7 @@ class Company extends React.PureComponent {
       [
         <Header key="header" isFirstScreen={this.state.isFirstScreen} isMobile={this.state.isMobile} />,
         <Banner key="banner" />,
-        <DebugTitle key="title" >Company Page {this.state.id}</DebugTitle>,
+        // <DebugTitle key="title" >Company Page {this.state.id}</DebugTitle>,
         <CompanyHead key="companyhead" />,
         <Footer key="footer" />
       ]
