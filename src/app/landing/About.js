@@ -31,9 +31,21 @@ class AboutText extends React.Component {
 
                 <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
                 <Card title="About" bordered={false} style={{ width: "100%"}} loading={false} >
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p>
+                    We are a group of tech executives based in Silicon Valley who are interested in investing in Japanese startups. 
+                    We are also, in parallel, planning a small venture capital fund called “Namaiki Ventures” which we hope to 
+                    launch in early 2020. We plan to use the “JPVCDB” website to both learn about the Japanese venture market, to 
+                    meet other interested investors, and to keep meeting with entrepreneurs in Japan.
+                    </p>
+                    <p>
+                      This website is an open source clone the very popular <a target="_blank" rel="noopener noreferrer" href="https://ycdb.co">ycdb</a> website and extends it
+                      for use by other organizations or, in this case, whole countries. SEO optimized, performant, opinionated 
+                      React/Next/AntDesign/Firebase template  app with fast loading landing page with lazy-loading of Firebase data 
+                      using a simple provider class.
+                    </p>
+                    <p>
+                      You can learn more about this website by contacting the developers, here: <a target="_blank" rel="noopener noreferrer" href="https://github.com/moflo">Github/moflo</a>
+                    </p>
                 </Card>
                 </div>
             </Content>

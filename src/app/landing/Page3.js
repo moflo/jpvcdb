@@ -34,7 +34,7 @@ export default function Page3({ isMobile, batch }) {
         title: 'Name',
         dataIndex: 'name',
         key: 'name',
-        render: ((text) => <Link href={`/company?id=`+text} as={`/company/`+text}><a>{text}</a></Link>),
+        render: ((text,record) => <Link href={`/company?id=`+record.id} as={`/company/`+record.id}><a>{text}</a></Link>),
     }, {
         title: 'Batch',
         dataIndex: 'batch',

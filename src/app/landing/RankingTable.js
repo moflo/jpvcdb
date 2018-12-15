@@ -183,7 +183,15 @@ class RankingTable extends React.PureComponent {
                 categoryFilter = [['category', '==', category]]
             }
             var order = 'desc'
-            if (sorttype == 'alexa') { order = 'asc' }
+            // if (sorttype == 'alexa') { order = 'asc' }
+            // if (sorttype == 'exit') { order = 'asc' }
+            if (sorttype == 'exit') {
+                if (categoryFilter != null) {
+                    categoryFilter.push(['status','==','Exited'])
+                } else {
+                    categoryFilter = [['status','==','Exited']]
+                }
+            }
 
             return (
             <DBQueryProvider path={'companies'} limit={100} filter={categoryFilter} sort={`${sorttype}:${order}`}>

@@ -3,7 +3,7 @@ import React from 'react';
 // import { enquireScreen } from 'enquire-js';
 import Header from './Header';
 import Banner from './Banner';
-// import Page3 from './Page3';
+import CompanyHead from './CompanyHead';
 // import Page4 from './Page4';
 import Footer from './Footer';
 import './static/style';
@@ -15,11 +15,11 @@ const DebugTitle = styled.h1`
   height: 200px;
 `
 
-
 let isMobile = false;
 // enquireScreen((b) => {
 //   isMobile = b;
 // });
+
 
 class Company extends React.PureComponent {
   state = {
@@ -48,6 +48,7 @@ class Company extends React.PureComponent {
         <Header key="header" isFirstScreen={this.state.isFirstScreen} isMobile={this.state.isMobile} />,
         <Banner key="banner" />,
         <DebugTitle key="title" >Company Page {this.state.id}</DebugTitle>,
+        <CompanyHead key="companyhead" />,
         <Footer key="footer" />
       ]
     );

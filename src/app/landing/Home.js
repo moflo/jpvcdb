@@ -6,7 +6,7 @@ import Banner from './Banner';
 import Page1 from './Page1';
 import Page2 from './Page2';
 import Page3 from './Page3';
-// import Page4 from './Page4';
+// import CompanyHead from './CompanyHead';
 import Footer from './Footer';
 import './static/style';
 import styled from 'styled-components';
@@ -40,6 +40,7 @@ class Home extends React.PureComponent {
       [
         <Header key="header" isFirstScreen={this.state.isFirstScreen} isMobile={this.state.isMobile} />,
         <Banner key="banner" onEnterChange={this.onEnterChange} />,
+        // <CompanyHead key="companyhead" />,
         <Page1 key="page1" isMobile={this.state.isMobile} />,
         <Page2 key="page2" isMobile={this.state.isMobile} />,
         <Page3 key="page3" isMobile={this.state.isMobile} />,

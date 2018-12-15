@@ -55,17 +55,17 @@ function Footer() {
             <div className="footer-center">
               <h2>Contact</h2>
               <div>
-                <a href="/contact">
+                <a href="/about">
                   Contact Us
                 </a>
               </div>
               <div>
-                <a target="_blank" rel="noopener noreferrer" href="https://github.com/ant-design/ant-design/wiki/FAQ">
+                <a target="_blank" rel="noopener noreferrer" href="/about">
                   Data Questions
                 </a>
               </div>
               <div>
-                <a target="_blank" rel="noopener noreferrer" href="https://gitter.im/ant-design/ant-design">
+                <a target="_blank" rel="noopener noreferrer" href="https://github.com/ant-design/ant-design/wiki/FAQ">
                   Design Questions
                 </a>
               </div>
