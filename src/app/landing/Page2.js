@@ -158,7 +158,7 @@ export default function Page2({ isMobile }) {
 
           return (
               <Row type="flex" justify="space-around" align="top">
-                <Col span={5}>
+                <Col span={7}>
                   <h2>Funding by Cohort</h2>
                   <Table
                     columns={columnsFunding} 
@@ -171,7 +171,7 @@ export default function Page2({ isMobile }) {
                     loading={isLoading} 
                     />
                 </Col>
-                <Col span={5}>
+                <Col span={7}>
                     <h2>Status Outcome by Cohort</h2>
                     <Table 
                     columns={columnsStatus} 
@@ -184,8 +184,9 @@ export default function Page2({ isMobile }) {
                       loading={isLoading} 
                       />
                 </Col>
-                <Col span={5}><DemoBox title="HQ Location">
-                  <Map />
+                <Col span={7}>
+                  <DemoBox title="HQ Location">
+                    <Map />
                   </DemoBox>
                 </Col>
               </Row>
