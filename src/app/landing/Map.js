@@ -17,7 +17,7 @@ export default class Map extends React.PureComponent {
 
     const map = new mapboxgl.Map({
     container: this.mapContainer,
-    style: 'mapbox://styles/moflo/cjpm243u904ue2smu3hhen462',
+    style: 'mapbox://styles/moflo/cjpsm6nut7l3a2ronzzzln222',
     center: [lng, lat],
     zoom
     });
