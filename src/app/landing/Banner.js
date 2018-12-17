@@ -20,7 +20,7 @@ export default function Banner({ onEnterChange }) {
               // onSearch={this.handleSearch}
               // onChange={this.handleChange}
               notFoundContent={null}
-              style={{ height: 40 }}
+              size="large"
             >
             </Select>
             <br />
