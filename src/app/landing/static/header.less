@@ -3,7 +3,7 @@
 #header {
   position: fixed;
   z-index: 999;
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 1.0);
   border-bottom: 1px solid transparent;
   transition: border .5s cubic-bezier(0.455, 0.03, 0.515, 0.955), background .5s cubic-bezier(0.455, 0.03, 0.515, 0.955);
   height: @header-height;
@@ -38,6 +38,7 @@
   line-height: 80px;
   width: 50px;
   margin-right: 8px;
+  margin-left: 40px;
 }
 
 #logo span {
@@ -49,19 +50,21 @@
   text-transform: uppercase;
 }
 
-#search-box {
-  border-left: 1px solid #ebedee;
-  float: left;
-  height: 22px;
-  line-height: 22px;
-  padding-left: 30px;
-  margin: 29px auto 0;
+.header-search-select {
+  height: 40px;
+  width: 200px;
+  color: #333;
 }
 
-#search-box .ant-select {
+.header-search-icon {
+  margin-left: -26px;
+}
+
+.header-search-select .ant-select {
   font-size: 14px;
   margin-top: -3px;
   width: 200px;
+  color: "#333"
 }
 
 #search-box .ant-select-selection {

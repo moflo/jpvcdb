@@ -7,6 +7,27 @@ function Footer() {
     <footer id="footer" className="dark">
       <div className="footer-wrap">
         <Row>
+        <Col lg={6} sm={24} xs={24}>
+            <div className="footer-center">
+              <h2>
+                <img className="title-icon" src="/static/logo-white.png" alt="" />
+                Mobile Flow LLC
+              </h2>
+              <div>
+                <a target="_blank" rel="noopener noreferrer" href="https://namaikiventures.com/">Namaiki</a>
+                <span> - </span>
+                Ventures
+                </div>
+              <div>
+                <a target="_blank" rel="noopener noreferrer" href="https://namaikiventures.com/">Namaiki</a>
+                <span> - </span>
+                Studio
+              </div>
+              <div>
+                <a href="/login">Admin</a>
+              </div>
+            </div>
+          </Col>
           <Col lg={6} sm={24} xs={24}>
             <div className="footer-center">
               <h2>JPVCDB Stack</h2>
@@ -68,27 +89,6 @@ function Footer() {
                 <a target="_blank" rel="noopener noreferrer" href="https://github.com/ant-design/ant-design/wiki/FAQ">
                   Design Questions
                 </a>
-              </div>
-            </div>
-          </Col>
-          <Col lg={6} sm={24} xs={24}>
-            <div className="footer-center">
-              <h2>
-                <img className="title-icon" src="/static/logo-white.png" alt="" />
-                Mobile Flow LLC
-              </h2>
-              <div>
-                <a target="_blank" rel="noopener noreferrer" href="https://namaikiventures.com/">Namaiki</a>
-                <span> - </span>
-                Ventures
-                </div>
-              <div>
-                <a target="_blank" rel="noopener noreferrer" href="https://namaikiventures.com/">Namaiki</a>
-                <span> - </span>
-                Studio
-              </div>
-              <div>
-                <a href="/login">Admin</a>
               </div>
             </div>
           </Col>

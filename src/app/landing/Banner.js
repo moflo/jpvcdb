@@ -25,7 +25,7 @@ export default function Banner({ onEnterChange }) {
             </Select>
             <br />
             <Link href='/'><Button type="primary">Random Company</Button></Link>
-            <Link href='/'><Button type="danger">Suggest a New Company</Button></Link>
+            <Link href='/'><Button type="default">Suggest a New Company</Button></Link>
           </div>
         </div>
     </section>

@@ -55,25 +55,25 @@ export default class Header extends React.Component {
       <Menu mode={menuMode} defaultSelectedKeys={[selectedMenu]} id="nav" key="nav">
         <Menu.Item key="home">
             <Col span={4}>
-              <Icon type="search" />
-              <Select
+              <Select className="header-search-select"
               showSearch
-              placeholder="Search companies"
+              placeholder="Seach companies"
               showArrow={false}
               filterOption={false}
               // onSearch={this.handleSearch}
               // onChange={this.handleChange}
               notFoundContent={null}
-              style={{ width: 200 }}
+              style={{ height: 40 }}
               >
             </Select>
+            <Icon className="header-search-icon" type="search" />
           </Col>
         </Menu.Item>
       </Menu>,
     ];
 
     return (
-      <header id="header" className="clearfix:true; home-nav-white: true;">
+      <header id="header" className="home-nav-white clearfix:true; home-nav-white: true;">
         {menuMode === 'inline' ? (
           <Popover
             overlayClassName="popover-menu"
@@ -95,7 +95,6 @@ export default class Header extends React.Component {
           <Col lg={4} md={5} sm={24} xs={24}>
             <a id="logo" href="/">
               <img alt="logo" src="/static/logo-white.png" />
-              <span>JP.VC.DB</span>
             </a>
           </Col>
           <Col lg={20} md={19} sm={0} xs={0}>
