@@ -18,6 +18,9 @@ const Page2Container = styled.div`
     background: #fff;
     padding: 0px;
     border-color: #fff;
+    -webkit-box-shadow: 10px 10px 28px 1px rgba(0,0,0,0.35);
+    -moz-box-shadow: 10px 10px 28px 1px rgba(0,0,0,0.35);
+    box-shadow: 10px 10px 28px 1px rgba(0,0,0,0.35);
   }
 
   .ant-table-row {
@@ -28,6 +31,11 @@ const Page2Container = styled.div`
     border-bottom-color: #f00;
   }
 
+  .map-box .mapboxgl-map {
+    -webkit-box-shadow: 10px 10px 28px 1px rgba(0,0,0,0.35);
+    -moz-box-shadow: 10px 10px 28px 1px rgba(0,0,0,0.35);
+    box-shadow: 10px 10px 28px 1px rgba(0,0,0,0.35);
+  }
 `
 
 const PageHeader = styled.h1`
@@ -36,7 +44,7 @@ const PageHeader = styled.h1`
 
 export default function Page2({ isMobile }) {
 
-  const DemoBox = props => <Card title={`${props.title}`}>{props.children}</Card>;
+  const MapBox = props => <div className="map-box"><h2>{props.title}</h2>{props.children}</div>;
 
   const columnsCount = [{
     title: 'Batch',
@@ -134,9 +142,9 @@ export default function Page2({ isMobile }) {
                       />
                 </Col>
                 <Col span={7}>
-                  <DemoBox title="HQ Location">
+                  <MapBox title="HQ Location">
                     <Map />
-                  </DemoBox>
+                  </MapBox>
                 </Col>
               </Row>
 

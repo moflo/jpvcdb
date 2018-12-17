@@ -36,7 +36,7 @@ export default class Map extends React.PureComponent {
 
   render() {
   return (
-    <div ref={el => this.mapContainer = el} className="absolute top right left bottom" style={{ height: 300 }} />
+    <div ref={el => this.mapContainer = el} className="absolute top right left bottom" style={{ height: 600 }} />
     );
   }
 }
