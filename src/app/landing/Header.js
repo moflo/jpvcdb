@@ -49,9 +49,9 @@ export default class Header extends React.Component {
     // });
 
     const menu = [
-      <Button className="header-lang-button" ghost size="small" key="lang">
-        English
-      </Button>,
+      <a className="header-lang-button" ghost size="small" key="lang">
+        🇯🇵
+      </a>,
       <Menu mode={menuMode} defaultSelectedKeys={[selectedMenu]} id="nav" key="nav">
         <Menu.Item key="home">
             <Col span={4}>
