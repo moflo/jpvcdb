@@ -222,9 +222,9 @@ class RankingTable extends React.PureComponent {
         <PageHeader>
             <span>Top 100 Companies By </span>
             <Select labelInValue defaultValue={{ key: sorttype }} style={{ width: 220 }} onChange={this.handleMenuChange}>
-                <Option value="funding"><Icon type="pay-circle" />  Funding</Option>
+                <Option value="funding"><Icon type="red-envelope" />  Funding</Option>
                 <Option value="exit"><Icon type="rocket" />  Exit Value</Option>
-                <Option value="employees"><Icon type="team" />  Employee Count</Option>
+                <Option value="employees"><Icon type="smile" />  Employee Count</Option>
                 <Option value="alexa"><Icon type="compass" />  Alexa Rank</Option>
                 <Option value="twitter"><Icon type="twitter" />  Twitter Followers</Option>
                 <Option value="tweets"><Icon type="message" />  Twitter Posts</Option>

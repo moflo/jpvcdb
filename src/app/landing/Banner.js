@@ -12,7 +12,7 @@ export default function Banner({ onEnterChange }) {
         <div className="banner-text-wrapper" >
           <h2>JP.VC.DB</h2>
           <div key="button1" className="start-buttonXXX clearfix">
-            <Select
+            <Select className="banner-search"
               showSearch
               placeholder="Search companies"
               showArrow={false}
@@ -20,12 +20,12 @@ export default function Banner({ onEnterChange }) {
               // onSearch={this.handleSearch}
               // onChange={this.handleChange}
               notFoundContent={null}
-              style={{ width: 400 }}
+              style={{ height: 40 }}
             >
             </Select>
             <br />
-            <Link href='/'><Button type="primary">Random Company</Button></Link>
-            <Link href='/'><Button type="default">Suggest a New Company</Button></Link>
+            <Link href='/'><Button className="banner-button-dark">Random Company</Button></Link>
+            <Link href='/'><Button className="banner-button-light">Suggest a New Company</Button></Link>
           </div>
         </div>
     </section>
