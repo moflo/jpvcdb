@@ -7,8 +7,13 @@ import styled from 'styled-components';
 
 const Page3Container = styled.div`
   margin-top: 30px;
-  margin-bottom: 30px;
+  padding-bottom: 20px;
   background-color: #f8f9fa;
+
+  .ant-tabs-left > .ant-tabs-bar .ant-tabs-tab {
+    text-align: left;
+    height: 18px;
+  }
 `
 const PageHeader = styled.h1`
     text-align: center;
@@ -95,10 +100,10 @@ export default function Page3({ isMobile, batch }) {
       <Row type="flex" justify="space-around" align="middle">
         <Col span={18}>
 
-        <Tabs
+        <Tabs className="home-cohort-tabs"
           defaultActiveKey="1"
           tabPosition="left"
-          tabBarStyle={{ color: "#00f", backgroundColor: "#fff", paddingTop: 0, paddingBottom: 0 }}
+          tabBarStyle={{ color: "#4d4d4d", backgroundColor: "#f8f9fa", paddingTop: 0, paddingBottom: 0 }}
         //   style={{ height: 220 }}
           size="small"
         >
