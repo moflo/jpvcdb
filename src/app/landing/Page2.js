@@ -12,6 +12,22 @@ const Map = dynamic(() => import('./Map.js'), {
 const Page2Container = styled.div`
   margin-top: 30px;
   margin-bottom: 30px;
+
+  .ant-table {
+    font-size: 16px;
+    background: #fff;
+    padding: 0px;
+    border-color: #fff;
+  }
+
+  .ant-table-row {
+    height: 18px;
+    background: #fff;
+    padding: 0px;
+    border-color: #fff;
+    border-bottom-color: #f00;
+  }
+
 `
 
 const PageHeader = styled.h1`
@@ -72,6 +88,24 @@ export default function Page2({ isMobile }) {
       </span>
     ),
   }];
+
+
+  const batchData = [
+    {batch: "2007", count: 4, percent: 0.5, exited: 2, live: 0, dead: 2, mega: 1, mini: 2, sead: 1, none: 0},
+    {batch: "2008", count: 4, percent: 0.5, exited: 2, live: 0, dead: 2, mega: 1, mini: 0, sead: 2, none: 0},
+    {batch: "2009", count: 4, percent: 0.5, exited: 2, live: 0, dead: 2, mega: 1, mini: 2, sead: 0, none: 0},
+    {batch: "2010", count: 4, percent: 0.5, exited: 2, live: 0, dead: 2, mega: 1, mini: 2, sead: 0, none: 0},
+    {batch: "2011", count: 4, percent: 0.5, exited: 2, live: 0, dead: 2, mega: 1, mini: 2, sead: 0, none: 0},
+    {batch: "2012", count: 4, percent: 0.5, exited: 2, live: 0, dead: 2, mega: 1, mini: 2, sead: 0, none: 0},
+    {batch: "2013", count: 4, percent: 0.5, exited: 2, live: 0, dead: 2, mega: 1, mini: 2, sead: 0, none: 0},
+    {batch: "2014", count: 4, percent: 0.5, exited: 2, live: 0, dead: 2, mega: 1, mini: 2, sead: 0, none: 0},
+    {batch: "2015", count: 4, percent: 0.5, exited: 2, live: 0, dead: 2, mega: 1, mini: 2, sead: 0, none: 0},
+    {batch: "2016", count: 4, percent: 0.5, exited: 0, live: 3, dead: 1, mega: 0, mini: 2, sead: 1, none: 1},
+    {batch: "2017", count: 4, percent: 0.5, exited: 0, live: 4, dead: 0, mega: 0, mini: 2, sead: 2, none: 0},
+    {batch: "2018", count: 4, percent: 0.5, exited: 0, live: 4, dead: 0, mega: 1, mini: 2, sead: 1, none: 0} 
+  ]
+
+
   const onRowSelect = record => {
     // console.log("Select record ", record)
     // redirect('/cohort/testing','/cohort?id=testing')
@@ -83,105 +117,31 @@ export default function Page2({ isMobile }) {
     <Page2Container>
       <PageHeader>Cohort Analysis</PageHeader> 
 
-      <DBQueryProvider path={'companies'} /*limit={10000}*/ sort="name">
-
-        { ({error, isLoading, data}) => {
-
-          // console.log(JSON.stringify(data))
-
-
-          let batches = data.map( co => co.batch )
-
-          let sortedBatches = [ ...new Set(batches)].sort((a,b) => parseInt(a.replace(/[ws]/i,'')) - parseInt(b.replace(/[ws]/i,'')))
-
-          const totalFunding = (d, b) => d.filter( co => co.batch == b).reduce( (funding,co) => funding + co.funding, 0)
-
-          var sortedFunding = sortedBatches.map( batch => totalFunding(data, batch) )
-
-          const totalCompanies = (d, b) => d.filter( co => co.batch == b).length
-
-          var sortedCount = sortedBatches.map( batch => totalCompanies(data, batch) )
-
-          const totalStatus = (d,b,s) => d.filter( co => co.batch == b && co.status == s).length
-
-          var sortedLive = sortedBatches.map( batch => totalStatus(data, batch, 'Live') )
-          var sortedExited = sortedBatches.map( batch => totalStatus(data, batch, 'Exited') )
-          var sortedDead = sortedBatches.map( batch => totalStatus(data, batch, 'Dead') )
-
-          const totalLevel = (d,b,min,max) => d.filter( co => co.batch == b && co.funding > min && co.funding <= max).length
-
-          var sortedMega = sortedBatches.map( batch => totalLevel(data, batch, 10.0, 99999999.0) )
-          var sortedMini = sortedBatches.map( batch => totalLevel(data, batch, 5.0, 10.0) )
-          var sortedSeed = sortedBatches.map( batch => totalLevel(data, batch, 0.0, 5.0) )
-          var sortedNone = sortedBatches.map( batch => totalLevel(data, batch, -1.0, 0.0) )
-
-          // Calcluate batch count
-
-          var batchCountData = []
-
-          let maxBatchCount = Math.max(...sortedCount)    // batch match
-
-          for (var [i,b] of sortedBatches.entries()) {
-              // console.log(`i: ${i} = ${b}, ${sortedCount[i]}`)
-              let percent = maxBatchCount != 0 ? sortedCount[i] / maxBatchCount : 1.0
-              var dataObj = {batch: b, count: sortedCount[i], percent: percent * 100.0}
-              batchCountData.push(dataObj)
-          }
-
-          // Calculate batch status
-
-          var batchStatusData = []
-
-          for (var [i,b] of sortedBatches.entries()) {
-              // console.log(`i: ${i} = ${b}, ${sortedCount[i]}`)
-              let live = sortedLive[i]
-              let dead = sortedDead[i]
-              let exited = sortedExited[i]
-              var dataObj = {batch: b, count: sortedCount[i], exited, live, dead}
-              batchStatusData.push(dataObj)
-          }
-
-          // Calculate batch funding levels
-
-          var batchFundingData = []
-
-          for (var [i,b] of sortedBatches.entries()) {
-              // console.log(`i: ${i} = ${b}, ${sortedCount[i]}`)
-              let mega = sortedMega[i]
-              let mini = sortedMini[i]
-              let seed = sortedSeed[i]
-              let none = sortedNone[i]
-              var dataObj = {batch: b, count: sortedCount[i], mega, mini, seed, none}
-              batchFundingData.push(dataObj)
-          }
-
-
-          return (
               <Row type="flex" justify="space-around" align="top">
                 <Col span={7}>
                   <h2>Funding by Cohort</h2>
                   <Table
                     columns={columnsFunding} 
-                    dataSource={batchFundingData} 
+                    dataSource={batchData} 
                     onRow={(record) => ({ onClick: () => { onRowSelect(record); } })}
                     showHeader={false} 
                     size="small" 
                     pagination={false} 
                     bordered={false}
-                    loading={isLoading} 
+                    // loading={isLoading} 
                     />
                 </Col>
                 <Col span={7}>
                     <h2>Status Outcome by Cohort</h2>
                     <Table 
                     columns={columnsStatus} 
-                    dataSource={batchStatusData} 
+                    dataSource={batchData} 
                       onRow={(record) => ({ onClick: () => { onRowSelect(record); } })}
                       showHeader={false} 
                       size="small" 
                       pagination={false} 
                       bordered={false}
-                      loading={isLoading} 
+                      // loading={isLoading} 
                       />
                 </Col>
                 <Col span={7}>
@@ -190,9 +150,7 @@ export default function Page2({ isMobile }) {
                   </DemoBox>
                 </Col>
               </Row>
-              )
-        }}
-      </DBQueryProvider>
+
     </Page2Container>
     );
 }
