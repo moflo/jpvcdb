@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Row, Col } from 'antd';
+import { Row, Col, Icon } from 'antd';
 
 function Footer() {
   return (
@@ -26,6 +26,7 @@ function Footer() {
               <div>
                 <a href="/login">Admin</a>
               </div>
+              <span><a href="https://twitter.com/moflome" ><Icon type="twitter" /></a><a href="https://github.com/moflo" ><Icon type="github" /></a><a href="/" ><Icon type="facebook" /></a></span>
             </div>
           </Col>
           <Col lg={6} sm={24} xs={24}>
