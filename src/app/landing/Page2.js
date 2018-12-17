@@ -89,6 +89,7 @@ export default function Page2({ isMobile }) {
     ),
   }];
 
+  // Generated from /scripts/generateAnalytics
 
   const batchData = [
     {batch: "2007", count: 4, percent: 0.5, exited: 2, live: 0, dead: 2, mega: 1, mini: 2, sead: 1, none: 0},

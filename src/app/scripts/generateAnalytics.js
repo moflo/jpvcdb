@@ -11,6 +11,13 @@ admin.initializeApp({
 const db = require('firebase-admin').firestore()
 db.settings({timestampsInSnapshots: true})  // Using Timestamps
 
+
+/* Analyze company data to generate a static JSON array cohort data including:
+    - cohort investment count
+    - cohort status: # exited, live or dead
+    - cohort funding tranch: # mega, mini, seed and no round 
+*/
+
 console.log(chalk.blue(`Generating analytics data...`))
 
 db.collection('companies').get()
