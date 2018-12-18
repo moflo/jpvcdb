@@ -47,7 +47,7 @@ class Company extends React.PureComponent {
         <Header key="header" isFirstScreen={this.state.isFirstScreen} isMobile={this.state.isMobile} />,
         <Banner key="banner" />,
         // <DebugTitle key="title" >Company Page {this.state.id}</DebugTitle>,
-        <CompanyHead key="companyhead" />,
+        <CompanyHead companyID={this.state.id} key="companyhead" />,
         <Footer key="footer" />
       ]
     );

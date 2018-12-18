@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Router from "next/router";
 import { Card, Row, Col, Avatar, Button, Icon } from 'antd';
 import CompanyAnalysis from './CompanyAnalysis';
+import CompanyFeedback from './CompanyFeedback';
 import styled from 'styled-components';
 
 const Page1Container = styled.div`
@@ -44,7 +45,7 @@ const InnerBoxImg = styled.img`
 `
 
 
-export default function CompanyHead({ isMobile }) {
+export default function CompanyHead({ isMobile, companyID }) {
 
   const { Meta } = Card;
 
@@ -79,7 +80,8 @@ export default function CompanyHead({ isMobile }) {
       <Row gutter={20} >
         <Col span={12} offset={2} >
             <Screenshot image="https://fillmurray.com/900/563" />
-            <CompanyAnalysis key="testing-page1" />,
+            <CompanyAnalysis key="analysis" />,
+            <CompanyFeedback companyID={companyID} key="feedback" />,
         </Col>
         <Col span={8} offset={1}>
         <Button type="primary" icon="link">Open the Company Website</Button>
