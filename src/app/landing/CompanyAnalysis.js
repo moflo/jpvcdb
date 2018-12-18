@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Router from "next/router";
-import { Card, Row, Col, Avatar, Icon, Tabs } from 'antd';
+import { Card, Row, Col, Progress, Icon, Tabs } from 'antd';
 import styled from 'styled-components';
 
 const AnalysisContainer = styled.div`
@@ -30,6 +30,10 @@ const AnalysisContainer = styled.div`
       border-color: #fff;
       background: #fff;
     }
+  
+  .ant-progress {
+    padding-top: 10px;
+  }
 `
 const PageHeader = styled.h2`
     padding-bottom: 30px;
@@ -37,8 +41,9 @@ const PageHeader = styled.h2`
 
 const TabPane = Tabs.TabPane
 
-export default function Analysis({ isMobile }) {
+export default function Analysis({ isMobile, performance }) {
 
+  const perf = performance || {"funding":5.2204930393039,"fundingCat":100,"alexa":52.23,"alexaCat":52.22,"twitter":3.0,"twitterCat":100,"employees":11.2,"employeesCat":42.0,"growth":22.1,"growthCat":82.44};
   const { Meta } = Card;
 
   const onCardSelect = (e,props) => {
@@ -47,34 +52,18 @@ export default function Analysis({ isMobile }) {
     Router.push(`/ranking?id=${target}`,`/ranking/${target}`)
   }
 
-  const DemoMeta = props => (
-  <Card hoverable={true} 
-    onClick={(e) => { onCardSelect(e,props) } }
-    >
-    <Meta avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-        title={props.title}
-        description={props.info}
-    />
-  </Card>
-  )
+  const RankingBox = props => (
+    <Card hoverable={true} 
+          title={props.title}
+          extra={<Icon type={props.icon}></Icon>} 
+          onClick={(e) => { onCardSelect(e,props) } }
+          >
+    {props.info}
+    <Progress percent={props.percent} status="active" />
+    </Card>
+    )
 
-  const DemoMetaAction = props => (
-  <Card actions={[<Icon type="table">Details</Icon>]} hoverable={true} onClick={(e) => { onCardSelect(e,props) } }>
-    <Meta avatar={<Icon type={props.icon} />}
-        title={props.title}
-        description={props.info}
-    />
-  </Card>
-  )
-
-  const DemoBox = props => (
-  <Card hoverable={true} 
-        title={props.title} 
-        onClick={(e) => { onCardSelect(e,props) } }
-        >
-  {props.info}
-  </Card>
-  )
+  const pt = number => number != null ? (number + 0.049999999).toFixed(1) : 0.0   // Round up to 0.1
 
   return (
     <AnalysisContainer>
@@ -86,30 +75,28 @@ export default function Analysis({ isMobile }) {
         >
           <TabPane tab={<span><Icon type="home" />Performance vs. Cohort</span>} key="1">
 
-          <Row type="flex" justify="space-around" align="middle">
-          <Col ><DemoMeta title="Top Funded" info="Top 100 companies by funding" link="funding" icon="pay-circle">Funding</DemoMeta></Col>
-          <Col ><DemoMeta title="Top Exits" info="Top 100 companies by exit" link="exit" icon="rocket">Exit</DemoMeta></Col>
+          <Row type="flex" justify="space-around" align="top">
+            <Col span={10}><RankingBox title="Funding" percent={pt(perf.funding)} info="Investment funding compared to cohort" link="funding" icon="red-envelope">Funding</RankingBox></Col>
+            <Col span={10}><RankingBox title="Exits" percent={pt(perf.exit)} info="Exit value compared to cohort" link="exit" icon="rocket">Exit</RankingBox></Col>
           </Row>
           <br />
           <Row type="flex" justify="space-around" align="top">
-          <Col ><DemoMetaAction title="Top Exits" info="Top 100 companies by exit" link="exit" icon="rocket">Exit</DemoMetaAction></Col>
-          <Col ><DemoMetaAction title="Top Employers" info="Top 100 companies by employees" link="employees" icon="team">Employees</DemoMetaAction></Col>
+            <Col span={10}><RankingBox title="Employees" percent={pt(perf.employees)} info="Employee count compared to cohort" link="employees" icon="smile">Employees</RankingBox></Col>
+            <Col span={10}><RankingBox title="Alexa Rank" percent={pt(perf.alexa)} info="Alexa rank compared to cohort" link="alexa" icon="compass">Alexa</RankingBox></Col>
           </Row>
-          <br />
 
           </TabPane>
 
           <TabPane tab={<span><Icon type="home" />vs. Sector</span>} key="2">
 
           <Row type="flex" justify="space-around" align="top">
-          <Col ><DemoMetaAction title="Top Exits" info="Top 100 companies by exit" link="exit" icon="rocket">Exit</DemoMetaAction></Col>
-          <Col ><DemoMetaAction title="Top Employers" info="Top 100 companies by employees" link="employees" icon="team">Employees</DemoMetaAction></Col>
+            <Col span={10}><RankingBox title="Funding" percent={pt(perf.fundingCat)} info="Investment funding within same category" link="funding" icon="red-envelope">Funding</RankingBox></Col>
+            <Col span={10}><RankingBox title="Exits" percent={pt(perf.exitCat)} info="Exit value within same category" link="exit" icon="rocket">Exit</RankingBox></Col>
           </Row>
           <br />
           <Row type="flex" justify="space-around" align="top">
-          <Col ><DemoBox title="Top Funded" info="Top 100 companies by funding" link="funding" icon="pay-circle">Funding</DemoBox></Col>
-          <Col ><DemoBox title="Top Exits" info="Top 100 companies by exit" link="exit" icon="rocket">Exit</DemoBox></Col>
-          <Col ><DemoBox title="Top Employers" info="Top 100 companies by employees" link="employees" icon="team">Employees</DemoBox></Col>
+            <Col span={10}><RankingBox title="Employees" percent={pt(perf.employeesCat)} info="Employee count within same category" link="employees" icon="smile">Employees</RankingBox></Col>
+            <Col span={10}><RankingBox title="Alexa Rank" percent={pt(perf.alexaCat)} info="Alexa rank within same category" link="alexa" icon="compass">Alexa</RankingBox></Col>
           </Row>
 
           </TabPane>
@@ -120,4 +107,5 @@ export default function Analysis({ isMobile }) {
 }
 Analysis.propTypes = {
   isMobile: PropTypes.bool,
+  performance: PropTypes.object
 };
