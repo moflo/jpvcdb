@@ -305,7 +305,6 @@ class CompanyCreate extends React.Component {
 
                         <FormItem label="Landingpage">
 
-                        <h4>Landingpage:</h4>
                           {getFieldDecorator('landingpage', {
                             valuePropName: 'fileList',
                             getValueFromEvent: this.normFile,
@@ -331,7 +330,6 @@ class CompanyCreate extends React.Component {
 
                         <FormItem label="Icon">
 
-                        <h4>Icon:</h4>
                           {getFieldDecorator('icon', {
                             valuePropName: 'fileListIcon',
                             getValueFromEvent: this.normFile,
