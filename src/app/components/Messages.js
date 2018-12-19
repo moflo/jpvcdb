@@ -70,6 +70,7 @@ export default class MFMessages extends React.Component {
       title: 'Message',
       dataIndex: 'message',
       key: 'message',
+      width: 450
     }, {
       title: 'Actions',
       // dataIndex: 'databaseURL',
