@@ -50,14 +50,26 @@ export default class MFMessages extends React.Component {
     const { deploying, loading, record } = this.state;
 
     const columns = [{
-      title: 'Message ID',
-      dataIndex: 'id',
-      key: 'id',
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
+    }, {
+      title: 'Email',
+      dataIndex: 'email',
+      key: 'email',
+    }, {
+      title: 'Problem',
+      dataIndex: 'problem',
+      key: 'peoblem',
+    }, {
+      title: 'Company',
+      dataIndex: 'company',
+      key: 'company',
+      render: ((text) => <a href={text} target="_blank" rel="noopener noreferrer">{text}</a>),
     }, {
       title: 'Message',
-      dataIndex: 'text',
-      key: 'text',
-      render: ((text) => <a href={text} target="_blank" rel="noopener noreferrer">{text}</a>),
+      dataIndex: 'message',
+      key: 'message',
     }, {
       title: 'Actions',
       // dataIndex: 'databaseURL',

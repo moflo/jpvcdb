@@ -3,6 +3,8 @@ import firebaseManager from './firebaseManager'
 
 export const doGooglePopup = () => firebaseManager.sharedInstance.handleLogin()
 
+export const doEmailSignin = (email,pass) => firebaseManager.sharedInstance.handleEmailLogin(email,pass)
+
 export const isAuthenticated = ctx => firebaseManager.sharedInstance.isLoggedIn()
 
 export const redirectIfAuthenticated = ctx => {

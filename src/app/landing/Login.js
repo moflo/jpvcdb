@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Row, Col, Form, Input, Icon, Button, Alert, notification} from 'antd';
-import { doGooglePopup, redirectIfAuthenticated } from "../lib/auth";
+import { doEmailSignin, redirectIfAuthenticated } from "../lib/auth";
 import Link from 'next/link'
 import styled from 'styled-components';
 
@@ -19,7 +19,7 @@ const LoginContainer = styled.div`
 `
 
 const BodyWrapper = styled.div`
-  background: linear-gradient(to left top,#e4506d,#f2b173);
+  background: linear-gradient(to left top,#bf0216,#f44e5f);
   min-height: 600px;
   height: 100vh;
   width: 100%;
@@ -54,25 +54,18 @@ class LoginForm extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
 
-        doGooglePopup().then((result) => {
-          console.log("login result", result)
-          redirectIfAuthenticated(result)
-        })
+        console.log(`handleSubmit: `+JSON.stringify(values) )
 
-        // firebase.auth().signInWithEmailAndPassword(values.email, values.password)
-        //   .then((result) => {
-        //     history.push('/dashboard');
-        //   })
-        //   .catch(function(error) {
-        //     // Handle Errors here.
-        //     var errorCode = error.code;
-        //     var errorMessage = error.message;
+        // doGooglePopup().then((result) => {
+        //   console.log("login result", result)
+        //   redirectIfAuthenticated(result)
+        // })
 
-        //     notification.error({
-        //       message: errorCode,
-        //       description: errorMessage
-        //     })
-        //   });
+        doEmailSignin(values.email,values.password).then((result) => {
+            console.log("login result", result)
+            redirectIfAuthenticated()
+          })
+          
       }
     });
   }

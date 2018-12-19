@@ -44,6 +44,23 @@ export default class firebaseManager {
         })
     }
     
+    handleEmailLogin = (email,pass) => {
+        return new Promise((resolve, reject) => {
+            if (!firebase.apps.length) firebase.initializeApp(clientCredentials)
+
+            firebase.auth().signInWithEmailAndPassword(email, pass)
+                .then((result) => {
+                    // console.log(`handleEmailLogin OK`+JSON.stringify(result))
+                    resolve()
+                })
+                .catch(function(error) {
+                    // console.log(`handleEmailLogin Error`+JSON.stringify(error))
+                    resolve(error)
+                })
+                
+        })
+    }
+
     isLoggedIn() {
         if (!firebase.apps.length) firebase.initializeApp(clientCredentials)
 

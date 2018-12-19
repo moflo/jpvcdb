@@ -20,13 +20,17 @@ render() {
   const { deploying } = this.state;
 
   const columns = [{
-    title: 'User ID',
-    dataIndex: 'id',
-    key: 'id',
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name',
   }, {
     title: 'Email',
     dataIndex: 'email',
     key: 'email',
+  }, {
+    title: 'User ID',
+    dataIndex: 'id',
+    key: 'id',
   }, {
     title: 'Avatar URL',
     dataIndex: 'avatarURL',
