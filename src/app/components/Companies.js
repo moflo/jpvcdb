@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Link from 'next/link'
-import { Layout, Breadcrumb, Button, Table, Tabs, Card, Form, Input, Upload, Select, Icon, Tag, notification } from 'antd';
+import { Layout, Breadcrumb, Button, Table, Tabs, Card, Form, Input, Upload, Modal, Select, Icon, Tag, message, notification } from 'antd';
 import styled from 'styled-components';
 import DBQueryProvider from './DBQueryProvider';
 import createCompany from '../lib/createCompany'
@@ -14,7 +14,18 @@ class CompanyCreate extends React.Component {
   state = {
     deploying: false,
     menuVisible: false,
-    loading: false
+    loading: false,
+    // Landingpage image upload
+    previewVisible: false,
+    previewImage: '',
+    fileList: [],
+    file: null,
+    percent: 0,
+    // Icon image upload
+    previewVisibleIcon: false,
+    previewImageIcon: '',
+    fileListIcon: [],
+    fileIcon: null
   }
 
   handleOk = () => {
@@ -28,11 +39,37 @@ class CompanyCreate extends React.Component {
     const {history} = this.props;
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log("title:", values.title)
-        console.log("body:", values.body)
+        console.log("handleSubmit values:", JSON.stringify(this.state.file))
 
-          createCompany(values)
-          .then( (resp) => {
+        let file = this.state.file
+
+        var hide = message.loading(`Loading... ${file.name}`, this.state.percent);
+
+        firebaseManager.sharedInstance.uploadFile(file,'landingpage.png',this.uploadProgress)
+        .then((result) => {
+          console.log("uploadFile result", result)
+
+          values.landingpage = result
+
+          hide()
+
+          let iconFile = this.state.fileIcon
+
+          hide = message.loading(`Loading icon... ${iconFile.name}`, this.state.percent);
+
+          return firebaseManager.sharedInstance.uploadFile(iconFile,'icon.png',this.uploadProgress)
+  
+        })
+        .then((result) => {
+          console.log("uploadFile result", result)
+
+          values.icon = result
+
+          hide()
+
+          return createCompany(values)
+        })
+        .then( (resp) => {
 
           if (resp) {
             notification.info({
@@ -40,14 +77,24 @@ class CompanyCreate extends React.Component {
                 description: `Thank you ${values.name}. We crteated a new company.`
             })
 
-            this.props.form.resetFields()
+          this.props.form.resetFields()
 
-            this.setState({
-              menuVisible: false
-            });
+          this.setState({
+            menuVisible: false
+          });
 
           }
+        })
+        .catch( err => {
+          var errorCode = err.code || 'Sorry, there was a problem.';
+          var errorMessage = err.message || 'Please correct the errors and submit again'
+  
+          notification.error({
+            message: errorCode,
+            description: errorMessage
           })
+
+        })
 
       }
       else {
@@ -72,19 +119,48 @@ class CompanyCreate extends React.Component {
 
   uploadProgress = (percent,task) => {
     console.log(`uploadProgress: progress = ${percent}`)
+    this.setState({ percent })
   }
 
   beforeUpload = (file) => {
-    firebaseManager.sharedInstance.uploadFile(file,'test.png',this.uploadProgress).then((result) => {
-      console.log("uploadFile result", result)
-      return result
-    })
+    this.setState({ file })
+    return true
+  }
+  beforeUploadIcon = (file) => {
+    this.setState({ fileIcon: file })
+    return true
   }
 
+  handlePreview = (file) => {
+    this.setState({
+      previewImage: file.url || file.thumbUrl,
+      previewVisible: true,
+    });
+  }
+  handlePreviewIcon = (file) => {
+    this.setState({
+      previewImageIcon: file.url || file.thumbUrl,
+      previewVisibleIcon: true,
+    });
+  }
+
+  handleCancelPreview = () => this.setState({ previewVisible: false })
+  handleCancelPreviewIcon = () => this.setState({ previewVisibleIcon: false })
+
+  handleChange = ({ fileList }) => this.setState({ fileList })
+  handleChangeIcon = ({ fileList }) => this.setState({ fileListIcon: fileList })
 
   render() {
     const { getFieldDecorator } = this.props.form;
     const { deploying, loading } = this.state;
+    const { previewVisible, previewImage, fileList } = this.state;
+    const { previewVisibleIcon, previewImageIcon, fileListIcon } = this.state;
+    const uploadButton = (
+      <div>
+        <Icon type="plus" />
+        <div className="ant-upload-text">Upload</div>
+      </div>
+    );
 
     return (
       <Content>
@@ -228,36 +304,56 @@ class CompanyCreate extends React.Component {
 
 
                         <FormItem label="Landingpage">
-                        {getFieldDecorator('landingpage', {
-                              initialValue: "http://"
-                          })(
-                            <Input prefix={<Icon type="edit" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder=" Landingpage" />
-                        )}
-                        </FormItem>
 
-                        <FormItem label="Icon">
-                        {getFieldDecorator('icon', {
-                              initialValue: 'http://'
-                          })(
-                            <Input prefix={<Icon type="edit" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder=" Icon" />
-                        )}
-                        </FormItem>
-
-                        <div className="dropbox" style={{ height: 340 }}>
                         <h4>Landingpage:</h4>
-                          {getFieldDecorator('dragger', {
+                          {getFieldDecorator('landingpage', {
                             valuePropName: 'fileList',
                             getValueFromEvent: this.normFile,
                           })(
-                            <Upload.Dragger name="files" beforeUpload={this.beforeUpload} showUploadList={true} >
-                              <p className="ant-upload-drag-icon">
-                                <Icon type="inbox" />
-                              </p>
-                              <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                              <p className="ant-upload-hint">Support for a single or bulk upload.</p>
-                            </Upload.Dragger>
+
+                              <div>
+                              <Upload
+                              listType="picture-card"
+                              fileList={fileList}
+                              onPreview={this.handlePreview}
+                              onChange={this.handleChange}
+                              beforeUpload={this.beforeUpload}
+                              >
+                              {fileList.length >= 1 ? null : uploadButton}
+                              </Upload>
+                              <Modal visible={previewVisible} footer={null} onCancel={this.handleCancelPreview}>
+                              <img alt="example" style={{ width: '100%' }} src={previewImage} />
+                              </Modal>
+                              </div>
+
                           )}
-                        </div>
+                        </FormItem>
+
+                        <FormItem label="Icon">
+
+                        <h4>Icon:</h4>
+                          {getFieldDecorator('icon', {
+                            valuePropName: 'fileListIcon',
+                            getValueFromEvent: this.normFile,
+                          })(
+
+                              <div>
+                              <Upload
+                              listType="picture-card"
+                              fileList={fileListIcon}
+                              onPreview={this.handlePreviewIcon}
+                              onChange={this.handleChangeIcon}
+                              beforeUpload={this.beforeUploadIcon}
+                              >
+                              {fileListIcon.length >= 1 ? null : uploadButton}
+                              </Upload>
+                              <Modal visible={previewVisibleIcon} footer={null} onCancel={this.handleCancelPreviewIcon}>
+                              <img alt="example" style={{ width: '100%' }} src={previewImageIcon} />
+                              </Modal>
+                              </div>
+
+                          )}
+                        </FormItem>
 
                     </TabPane>
                   </Tabs>

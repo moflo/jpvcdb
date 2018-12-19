@@ -33,7 +33,8 @@
     "@babel/runtime": "^7.2.0",
     "mapbox-gl": "^0.51.0",
     "path-match": "1.2.4",
-    "algoliasearch": "^3.32.0"
+    "algoliasearch": "^3.32.0",
+    "slugify": "^1.3.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.0",

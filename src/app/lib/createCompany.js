@@ -1,4 +1,5 @@
 import firebaseManager from './firebaseManager'
+const slugify = require('slugify')
 
 const createCompany = values => {
 
@@ -7,9 +8,10 @@ const createCompany = values => {
   //   action: 'Create messasge',
   // })
 
-  let id = values.name
+  const id = slugify(values.name, {lower: true})
 
   let company = {
+    id,
     name: values.name,
     batch: values.batch,
     description: values.description,
@@ -40,7 +42,8 @@ const createCompany = values => {
 
   return firebaseManager.sharedInstance.firestore()
     .collection('companies')
-    .add(firebaseManager.sharedInstance.prepareDocForCreate(values))
+    .doc(id)
+    .set(firebaseManager.sharedInstance.prepareDocForCreate(values))
     .then( () => values)
     .catch( error => {
       alert(`Whoops, couldn't create the post: ${error.message}`)
