@@ -1,6 +1,7 @@
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
+import 'firebase/storage'
 import clientCredentials from '../credentials/client'
 
 
@@ -111,6 +112,48 @@ export default class firebaseManager {
         })
 
         return doc
+    }
+
+
+    /*
+        file :  JS File reference
+        name :  Override existing file name, needs and extension ('test.jpg')
+        onProgress:  function to update progress (percent, task)
+        onError:  function to respond to upload error (error, task)
+    */
+
+    uploadFile = (file,name,onProgress,onError) => {
+        return new Promise((resolve, reject) => {
+            if (!firebase.apps.length) firebase.initializeApp(clientCredentials)
+
+            var storageRef = firebase.storage().ref('images')
+
+            let filenameToUse = name || file.name || 'upload.png'
+
+            console.log(`uploadfile, filename: ${filenameToUse}`)
+
+            const task = storageRef.child(filenameToUse).put(file)
+
+            task.on(
+                'state_changed',
+                snapshot =>
+                  onProgress &&
+                  onProgress(
+                    Math.round(100 * snapshot.bytesTransferred / snapshot.totalBytes),
+                    task
+                  ),
+                error => {
+                    onError && onError(error, task)
+                    resolve()
+                },
+                () => {
+                    // Return download URL
+                    storageRef.child(filenameToUse).getDownloadURL()
+                    .then(url => resolve( url) );
+                }
+              );
+      
+        })
     }
 
 }

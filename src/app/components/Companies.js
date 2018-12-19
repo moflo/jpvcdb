@@ -1,9 +1,10 @@
 import * as React from 'react'
 import Link from 'next/link'
-import { Layout, Breadcrumb, Button, Table, Tabs, Card, Form, Input, Switch, Slider, Icon, Tag, notification } from 'antd';
+import { Layout, Breadcrumb, Button, Table, Tabs, Card, Form, Input, Upload, Select, Icon, Tag, notification } from 'antd';
 import styled from 'styled-components';
 import DBQueryProvider from './DBQueryProvider';
-
+import createCompany from '../lib/createCompany'
+import firebaseManager from '../lib/firebaseManager'
 
 const { Content } = Layout;
 const FormItem  = Form.Item;
@@ -29,9 +30,25 @@ class CompanyCreate extends React.Component {
       if (!err) {
         console.log("title:", values.title)
         console.log("body:", values.body)
-        this.setState({
-          menuVisible: false,
-        });
+
+          createCompany(values)
+          .then( (resp) => {
+
+          if (resp) {
+            notification.info({
+                message: "Company Created!",
+                description: `Thank you ${values.name}. We crteated a new company.`
+            })
+
+            this.props.form.resetFields()
+
+            this.setState({
+              menuVisible: false
+            });
+
+          }
+          })
+
       }
       else {
         var errorCode = err.code || 'Sorry, there was a problem.';
@@ -45,6 +62,26 @@ class CompanyCreate extends React.Component {
     })
   }
 
+  normFile = (e) => {
+    console.log('Upload event:', e);
+    if (Array.isArray(e)) {
+      return e;
+    }
+    return e && e.fileList;
+  }
+
+  uploadProgress = (percent,task) => {
+    console.log(`uploadProgress: progress = ${percent}`)
+  }
+
+  beforeUpload = (file) => {
+    firebaseManager.sharedInstance.uploadFile(file,'test.png',this.uploadProgress).then((result) => {
+      console.log("uploadFile result", result)
+      return result
+    })
+  }
+
+
   render() {
     const { getFieldDecorator } = this.props.form;
     const { deploying, loading } = this.state;
@@ -57,44 +94,173 @@ class CompanyCreate extends React.Component {
         <Card title="New Company" bordered={false} style={{ width: "100%"}} loading={false} >
             <Form onSubmit={this.handleSubmit}>
             <Tabs defaultActiveKey="1" >
-                    <TabPane tab="Title" key="1">
+                    <TabPane tab="Info" key="1">
 
-                        <FormItem label="Title">
-                        {getFieldDecorator('title', {
-                            rules: [{ required: true, message: 'Please input a title!' }],
+                        <FormItem label="Name">
+                        {getFieldDecorator('name', {
+                            rules: [{ required: true, message: 'Please input a name!' }],
                         })(
                             <Input prefix={<Icon type="edit" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder=" New Company" />
                         )}
                         </FormItem>
 
-                        <FormItem label="Message">
-                        {getFieldDecorator('body', {
-                            rules: [{ required: true, message: 'Please input your message!' }],
+                        <FormItem label="Description">
+                        {getFieldDecorator('description', {
+                            rules: [{ required: true, message: 'Please input your description!' }],
                         })(
-                            <Input prefix={<Icon type="edit" style={{ color: 'rgba(0,0,0,.25)' }} />} type="text" placeholder=" Message..." />
+                            <Input prefix={<Icon type="edit" style={{ color: 'rgba(0,0,0,.25)' }} />} type="text" placeholder=" Description..." />
+                        )}
+                        </FormItem>
+
+                        <FormItem label="Batch">
+                        {getFieldDecorator('batch', {
+                            rules: [{ required: true, message: 'Please input your batch!' }],
+                        })(
+                            <Input prefix={<Icon type="edit" style={{ color: 'rgba(0,0,0,.25)' }} />} type="text" placeholder=" Batch" />
+                        )}
+                        </FormItem>
+
+                        <FormItem label="Category">
+                        {getFieldDecorator('category', {
+                            rules: [{ required: true, message: 'Please input your category!' }],
+                            initialValue: 'Other SaaS',
+
+                        })(
+                          <Select style={{ width: 150 }}>
+                            <Option value="Aerospace" icon="rocket" >Aerospace</Option>
+                            <Option value="Agriculture" icon="compass" >Agriculture</Option>
+                            <Option value="AI and ML" icon="setting" >AI and ML</Option>
+                            <Option value="Blockchain" icon="link" >Blockchain</Option>
+                            <Option value="Consumer" icon="user" >Consumer</Option>
+                            <Option value="Dev Tools" icon="tool" >Dev Tools</Option>
+                            <Option value="Education" icon="edit" >Education</Option>
+                            <Option value="Entertainment" icon="video-camera" >Entertainment</Option>
+                            <Option value="Fintech" icon="bank" >Fintech</Option>
+                            <Option value="Government" icon="pound" >Government</Option>
+                            <Option value="Healthcare" icon="medicine-box" >Healthcare</Option>
+                            <Option value="Industrial" icon="experiment" >Industrial</Option>
+                            <Option value="Real Estate" icon="shop" >Real Estate</Option>
+                            <Option value="Resources" icon="crown" >Resources</Option>
+                            <Option value="Transport" icon="car" >Transport</Option>
+                            <Option value="Other SaaS" icon="cloud" >Other SaaS</Option>
+                            <Option value="Nonprofit" icon="team" >Nonprofit</Option>                          
+                          </Select>
+
+                        )}
+                        </FormItem>
+
+
+                        <FormItem label="Status">
+                        {getFieldDecorator('status', {
+                            rules: [{ required: true, message: 'Please input company status!' }],
+                            initialValue: 'Live',
+
+                        })(
+                          <Select style={{ width: 150 }}>
+                            <Option value="Live" icon="rocket" >Live</Option>
+                            <Option value="Dead" icon="compass" >Dead</Option>
+                            <Option value="Exited" icon="setting" >Exited</Option>                          
+                          </Select>
+
+                        )}
+                        </FormItem>
+
+
+                    </TabPane>
+                    <TabPane tab="Performance" key="2">
+
+
+                        <FormItem label="Funding">
+                        {getFieldDecorator('funding', {
+                              initialValue: 0
+                          })(
+                            <Input prefix={<Icon type="edit" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder=" Funding" />
+                        )}
+                        </FormItem>
+
+                        <FormItem label="Exit">
+                        {getFieldDecorator('exit', {
+                              initialValue: 0
+                          })(
+                            <Input prefix={<Icon type="edit" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder=" Exit" />
+                        )}
+                        </FormItem>
+
+                        <FormItem label="Employees">
+                        {getFieldDecorator('employees', {
+                              initialValue: 1
+                          })(
+                            <Input prefix={<Icon type="edit" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder=" Employees" />
                         )}
                         </FormItem>
 
                     </TabPane>
-                    <TabPane tab="Settings" key="2">
+                    <TabPane tab="Address" key="3">
 
-                        <FormItem label="Switch" >
-                            {getFieldDecorator('switch', { valuePropName: 'checked' })(
-                                <Switch />
-                            )}
+
+                        <FormItem label="Address">
+                        {getFieldDecorator('address', {
+                              initialValue: ""
+                          })(
+                            <Input prefix={<Icon type="edit" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder=" Address" />
+                        )}
                         </FormItem>
 
-                        <FormItem label="Slider" >
-                            {getFieldDecorator('slider')(
-                                <Slider marks={{
-                                0: 'A', 20: 'B', 40: 'C', 60: 'D', 80: 'E', 100: 'F',
-                                }}
-                                />
-                            )}
+                        <FormItem label="Website">
+                        {getFieldDecorator('www', {
+                              initialValue: 'http://'
+                          })(
+                            <Input prefix={<Icon type="edit" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder=" Website" />
+                        )}
+                        </FormItem>
+
+                        <FormItem label="HQ Location">
+                        {getFieldDecorator('hqLocation', {
+                              initialValue: ''
+                          })(
+                            <Input prefix={<Icon type="edit" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="  Location" />
+                        )}
                         </FormItem>
 
                     </TabPane>
-                </Tabs>
+
+                    <TabPane tab="Design" key="4">
+
+
+                        <FormItem label="Landingpage">
+                        {getFieldDecorator('landingpage', {
+                              initialValue: "http://"
+                          })(
+                            <Input prefix={<Icon type="edit" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder=" Landingpage" />
+                        )}
+                        </FormItem>
+
+                        <FormItem label="Icon">
+                        {getFieldDecorator('icon', {
+                              initialValue: 'http://'
+                          })(
+                            <Input prefix={<Icon type="edit" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder=" Icon" />
+                        )}
+                        </FormItem>
+
+                        <div className="dropbox" style={{ height: 340 }}>
+                        <h4>Landingpage:</h4>
+                          {getFieldDecorator('dragger', {
+                            valuePropName: 'fileList',
+                            getValueFromEvent: this.normFile,
+                          })(
+                            <Upload.Dragger name="files" beforeUpload={this.beforeUpload} showUploadList={true} >
+                              <p className="ant-upload-drag-icon">
+                                <Icon type="inbox" />
+                              </p>
+                              <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                              <p className="ant-upload-hint">Support for a single or bulk upload.</p>
+                            </Upload.Dragger>
+                          )}
+                        </div>
+
+                    </TabPane>
+                  </Tabs>
 
                 <FormItem>
                     <Button type="primary" htmlType="submit" style={{ marginTop: 16}} >
@@ -164,6 +330,7 @@ export default class MFCompanies extends React.Component {
       title: 'Status',
       dataIndex: 'status',
       key: 'status',
+      align: 'center',
       render: ((tag) => <Tag color={colorForStatus(tag)} key={tag} >{tag.toUpperCase()}</Tag>)
     }, {
       title: 'Category',
@@ -191,7 +358,7 @@ export default class MFCompanies extends React.Component {
           <Button type="secondary" size="large" icon="plus" onClick={this.handleShowMenu}> New Company </Button>
           </div>
           
-          <DBQueryProvider path={'companies'} >
+          <DBQueryProvider path={'companies'} limit={10} >
 
           { ({error, isLoading, data}) => {
           
