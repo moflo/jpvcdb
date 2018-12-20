@@ -10,22 +10,107 @@ const { Content } = Layout;
 const FormItem  = Form.Item;
 const TabPane = Tabs.TabPane;
 
+class PhotoUpload extends React.Component {
+  static getDerivedStateFromProps(nextProps) {
+    // Should be a controlled component.
+    if ('value' in nextProps) {
+      return {
+        ...(nextProps.value || {}),
+      };
+    }
+    return null;
+  }
+
+  constructor(props) {
+    super(props);
+
+    const value = props.value || {};
+    this.state = {
+      previewVisible: false,
+      previewImage: '',
+      fileList: [],
+      file: value.file,
+      percent: 0,
+      };
+  }
+
+  beforeUpload = (file) => {
+    this.setState({ file })
+    this.triggerChange({ file });
+    return true
+  }
+
+  triggerChange = (changedValue) => {
+    // Should provide an event to pass value to Form.
+    const onChange = this.props.onChange;
+    if (onChange) {
+      console.log(`triggerChange: ${JSON.stringify(changedValue)}`)
+      // onChange(Object.assign({}, this.state, changedValue));
+      onChange(changedValue);
+    }
+  }
+
+  normFile = (e) => {
+    console.log('Upload event:', e);
+    if (Array.isArray(e)) {
+      return e;
+    }
+    return e && e.fileList;
+  }
+
+  handlePreview = (file) => {
+    this.setState({
+      previewImage: file.url || file.thumbUrl,
+      previewVisible: true,
+    });
+  }
+
+  handleCancelPreview = () => this.setState({ previewVisible: false })
+
+  handleChange = ({ fileList }) => {
+    this.setState({ fileList });
+    if (fileList.length == 0) {
+      this.triggerChange({ file: null });
+    }
+  };
+
+  render() {
+    const { size } = this.props;
+    const { previewVisible, previewImage, fileList } = this.state;
+    const uploadButton = (
+      <div>
+        <Icon type="plus" />
+        <div className="ant-upload-text">Upload</div>
+      </div>
+    );
+
+    return (
+      <div>
+        <Upload
+        listType="picture-card"
+        fileList={fileList}
+        onPreview={this.handlePreview}
+        onChange={this.handleChange}
+        beforeUpload={this.beforeUpload}
+        >
+        {fileList.length >= 1 ? null : uploadButton}
+        </Upload>
+        <Modal visible={previewVisible} footer={null} onCancel={this.handleCancelPreview}>
+        <img alt="example" style={{ width: '100%' }} src={previewImage} />
+        </Modal>
+      </div>
+    );
+  }
+}
+
+
 class CompanyCreate extends React.Component {
   state = {
+    cancelCallback: this.props.cancelCallback,
     deploying: false,
     menuVisible: false,
     loading: false,
-    // Landingpage image upload
-    previewVisible: false,
-    previewImage: '',
-    fileList: [],
-    file: null,
-    percent: 0,
-    // Icon image upload
-    previewVisibleIcon: false,
-    previewImageIcon: '',
-    fileListIcon: [],
-    fileIcon: null
+    percent: 0
   }
 
   handleOk = () => {
@@ -39,9 +124,10 @@ class CompanyCreate extends React.Component {
     const {history} = this.props;
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log("handleSubmit values:", JSON.stringify(this.state.file))
+        console.log("handleSubmit values:", JSON.stringify(values))
 
-        let file = this.state.file
+        /*
+        let file = values.landingpage
 
         var hide = message.loading(`Loading... ${file.name}`, this.state.percent);
 
@@ -53,7 +139,7 @@ class CompanyCreate extends React.Component {
 
           hide()
 
-          let iconFile = this.state.fileIcon
+          let iconFile = values.icon
 
           hide = message.loading(`Loading icon... ${iconFile.name}`, this.state.percent);
 
@@ -79,9 +165,7 @@ class CompanyCreate extends React.Component {
 
           this.props.form.resetFields()
 
-          this.setState({
-            menuVisible: false
-          });
+          this.state.cancelCallback && this.state.cancelCallback()
 
           }
         })
@@ -95,6 +179,8 @@ class CompanyCreate extends React.Component {
           })
 
         })
+
+        */
 
       }
       else {
@@ -122,33 +208,16 @@ class CompanyCreate extends React.Component {
     this.setState({ percent })
   }
 
-  beforeUpload = (file) => {
-    this.setState({ file })
-    return true
-  }
-  beforeUploadIcon = (file) => {
-    this.setState({ fileIcon: file })
-    return true
-  }
+  // Testing validation
+  validateUpload = (rule, value, callback) => {
+    console.log(`validateUpdate: ${JSON.stringify(value)}`)
+    if (true) {   //(value && value.file) {
+      callback();
+      return;
+    }
 
-  handlePreview = (file) => {
-    this.setState({
-      previewImage: file.url || file.thumbUrl,
-      previewVisible: true,
-    });
+    callback && callback('Need to add image')
   }
-  handlePreviewIcon = (file) => {
-    this.setState({
-      previewImageIcon: file.url || file.thumbUrl,
-      previewVisibleIcon: true,
-    });
-  }
-
-  handleCancelPreview = () => this.setState({ previewVisible: false })
-  handleCancelPreviewIcon = () => this.setState({ previewVisibleIcon: false })
-
-  handleChange = ({ fileList }) => this.setState({ fileList })
-  handleChangeIcon = ({ fileList }) => this.setState({ fileListIcon: fileList })
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -305,52 +374,25 @@ class CompanyCreate extends React.Component {
 
                         <FormItem label="Landingpage">
 
-                          {getFieldDecorator('landingpage', {
-                            valuePropName: 'fileList',
+                        {getFieldDecorator('landingpage', {
+                            // valuePropName: 'value',
                             getValueFromEvent: this.normFile,
-                          })(
+                            initialValue: { file: null },
+                            rules: [{ validator: this.validateUpload }]
+                            })( <PhotoUpload /> )}
 
-                              <div>
-                              <Upload
-                              listType="picture-card"
-                              fileList={fileList}
-                              onPreview={this.handlePreview}
-                              onChange={this.handleChange}
-                              beforeUpload={this.beforeUpload}
-                              >
-                              {fileList.length >= 1 ? null : uploadButton}
-                              </Upload>
-                              <Modal visible={previewVisible} footer={null} onCancel={this.handleCancelPreview}>
-                              <img alt="example" style={{ width: '100%' }} src={previewImage} />
-                              </Modal>
-                              </div>
 
-                          )}
                         </FormItem>
 
                         <FormItem label="Icon">
 
                           {getFieldDecorator('icon', {
-                            valuePropName: 'fileListIcon',
+                            // valuePropName: 'value',
                             getValueFromEvent: this.normFile,
-                          })(
+                            initialValue: { file: null },
+                            rules: [{ validator: this.validateUpload }]
+                            })( <PhotoUpload /> )}
 
-                              <div>
-                              <Upload
-                              listType="picture-card"
-                              fileList={fileListIcon}
-                              onPreview={this.handlePreviewIcon}
-                              onChange={this.handleChangeIcon}
-                              beforeUpload={this.beforeUploadIcon}
-                              >
-                              {fileListIcon.length >= 1 ? null : uploadButton}
-                              </Upload>
-                              <Modal visible={previewVisibleIcon} footer={null} onCancel={this.handleCancelPreviewIcon}>
-                              <img alt="example" style={{ width: '100%' }} src={previewImageIcon} />
-                              </Modal>
-                              </div>
-
-                          )}
                         </FormItem>
 
                     </TabPane>
