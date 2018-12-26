@@ -134,7 +134,7 @@ class MessageCreate extends React.Component {
                         <FormItem label="Rating" >
                         <p>How you feel about this website?</p>
                             {getFieldDecorator('rating')(
-                                <Rate />
+                                <Rate style={{ color: "#ed2939"}} />
                             )}
                         </FormItem>
 

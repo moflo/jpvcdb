@@ -4,10 +4,10 @@
 // TODO: Need to add pagination capabilities, including record count
 
 import React from 'react'
-import firebaseManager from '../lib/firebaseManager'
+import firebaseManager from './firebaseManager'
 import PropTypes from 'prop-types';
 
-class DBQueryProvider extends React.Component {
+class FirebaseProvider extends React.Component {
     static propTypes = {
       path: PropTypes.string.isRequired,
       sort: PropTypes.string,
@@ -140,5 +140,5 @@ class DBQueryProvider extends React.Component {
     }
   }
   
-  export default DBQueryProvider;
+  export default FirebaseProvider;
   

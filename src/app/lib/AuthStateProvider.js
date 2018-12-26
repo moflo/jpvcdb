@@ -1,7 +1,7 @@
 // wrapper for Firebase authentication with lazy-loading
 
 import React from 'react'
-import firebaseManager from '../lib/firebaseManager'
+import firebaseManager from './firebaseManager'
 
 
 class AuthStateProvider extends React.Component {

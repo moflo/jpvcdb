@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Router from "next/router";
 import { Card, Row, Col, Table, Tag } from 'antd';
-import DBQueryProvider from '../components/DBQueryProvider';
+import FirebaseProvider from '../lib/FirebaseProvider';
 import styled from 'styled-components';
 import dynamic from 'next/dynamic'
 const Map = dynamic(() => import('./Map.js'), {

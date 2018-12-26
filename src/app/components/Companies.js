@@ -2,7 +2,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Layout, Breadcrumb, Button, Table, Tabs, Card, Form, Input, Upload, Modal, Select, Icon, Tag, message, notification } from 'antd';
 import styled from 'styled-components';
-import DBQueryProvider from './DBQueryProvider';
+import FirebaseProvider from '../lib/FirebaseProvider';
 import createCompany from '../lib/createCompany'
 import firebaseManager from '../lib/firebaseManager'
 
@@ -492,7 +492,7 @@ export default class MFCompanies extends React.Component {
           <Button type="secondary" size="large" icon="plus" onClick={this.handleShowMenu}> New Company </Button>
           </div>
           
-          <DBQueryProvider path={'companies'} limit={10} >
+          <FirebaseProvider path={'companies'} limit={10} >
 
           { ({error, isLoading, data}) => {
           
@@ -511,7 +511,7 @@ export default class MFCompanies extends React.Component {
             )
           }}
 
-          </DBQueryProvider>
+          </FirebaseProvider>
           
         </div>
         }

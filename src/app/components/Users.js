@@ -2,7 +2,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Layout, Breadcrumb, Avatar, Table } from 'antd';
 import styled from 'styled-components';
-import DBQueryProvider from './DBQueryProvider';
+import FirebaseProvider from '../lib/FirebaseProvider';
 
 const { Content } = Layout;
 
@@ -47,7 +47,7 @@ render() {
       <Breadcrumb.Item>Users</Breadcrumb.Item>
       </Breadcrumb>
 
-      <DBQueryProvider path={'users'} >
+      <FirebaseProvider path={'users'} >
 
       { ({error, isLoading, data}) => {
       
@@ -68,7 +68,7 @@ render() {
         )
       }}
 
-      </DBQueryProvider>
+      </FirebaseProvider>
     </Content>
     )
 

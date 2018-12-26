@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link'
 import { Tabs, Row, Col, Table, Tag, Icon, Select } from 'antd';
-import DBQueryProvider from '../components/DBQueryProvider';
+import FirebaseProvider from '../lib/FirebaseProvider';
 import styled from 'styled-components';
 
 const RankingTableContainer = styled.div`
@@ -194,7 +194,7 @@ class RankingTable extends React.PureComponent {
             }
 
             return (
-            <DBQueryProvider path={'companies'} limit={100} filter={categoryFilter} sort={`${sorttype}:${order}`}>
+            <FirebaseProvider path={'companies'} limit={100} filter={categoryFilter} sort={`${sorttype}:${order}`}>
 
             { ({error, isLoading, data}) => {
 
@@ -213,7 +213,7 @@ class RankingTable extends React.PureComponent {
             )
             }}
 
-            </DBQueryProvider>
+            </FirebaseProvider>
             )
         }
 

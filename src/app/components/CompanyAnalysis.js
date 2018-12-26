@@ -34,7 +34,12 @@ const AnalysisContainer = styled.div`
   .ant-progress {
     padding-top: 10px;
   }
+
+  .ant-card-head {
+    background: #F3F3F3;
+  }
 `
+
 const PageHeader = styled.h2`
     padding-bottom: 30px;
 `

@@ -2,7 +2,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Layout, Breadcrumb, Button, Table, Modal } from 'antd';
 import styled from 'styled-components';
-import DBQueryProvider from './DBQueryProvider';
+import FirebaseProvider from '../lib/FirebaseProvider';
 
 
 const { Content } = Layout;
@@ -92,7 +92,7 @@ export default class MFMessages extends React.Component {
         <Button type="secondary" size="large" icon="plus" onClick={this.handleShowMenu}> Add Message </Button>
         </div>
         
-          <DBQueryProvider path={'messages'} >
+          <FirebaseProvider path={'messages'} >
 
           { ({error, isLoading, data}) => {
           
@@ -111,7 +111,7 @@ export default class MFMessages extends React.Component {
             )
           }}
 
-          </DBQueryProvider>
+          </FirebaseProvider>
 
         </div>
         <Modal

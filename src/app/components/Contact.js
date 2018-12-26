@@ -6,7 +6,8 @@ import styled from 'styled-components';
 
 const ContactSection = styled.div`
     text-align: left;
-    border: 1px solid #d9d9d9;
+    border-left: 1px solid #d9d9d9;
+    padding-left: 40px;
 `
 
 

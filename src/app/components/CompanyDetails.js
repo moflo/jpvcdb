@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import Router from "next/router";
 import { Card, Row, Col, Avatar, Button, Icon } from 'antd';
 import CompanyAnalysis from './CompanyAnalysis';
-import CompanyFeedback from './CompanyFeedback';
-import CompanyHead from './CompanyHead';
-import CompanyContact from './CompanyContact';
+import CompanyFeedback from './Feedback';
+import CompanyHead from './Masthead';
+import CompanyContact from './Contact';
 import styled from 'styled-components';
 
 const Page1Container = styled.div`
@@ -33,13 +33,11 @@ export default function CompanyDetails({ isMobile, companyID }) {
   return (
     <Page1Container>
       <PageHeader>Company Header</PageHeader> 
-      <Row align="top" style={{ paddingBottom: 30 }}>
-      </Row>
-      <Row gutter={20} >
+      <Row gutter={20} align="top" style={{ paddingBottom: 30 }}>
         <Col span={12} offset={2} >
             <CompanyHead icon="https://via.placeholder/com/128x128" />
-            <CompanyAnalysis key="analysis" />,
-            <CompanyFeedback companyID={companyID} key="feedback" />,
+            <CompanyAnalysis key="analysis" />
+            <CompanyFeedback companyID={companyID} key="feedback" />
         </Col>
         <Col span={8} offset={1}>
             <CompanyContact />

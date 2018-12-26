@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Router from "next/router";
-import { Card, Row, Col, Avatar, Button, Icon } from 'antd';
+import { Row, Col, Avatar, Icon } from 'antd';
 import styled from 'styled-components';
 
 const Page1Container = styled.div`
@@ -25,10 +24,10 @@ const OuterboxImg = styled.img`
 
 const InnerBox = styled.div`
   height: auto;
-  width: 84%;
+  width: 64%; /* 84% */
   opacity: 1;
-  top: 4%;
-  left: 8%;
+  top: 5%;  /* 4% */
+  left: 17%; /* 8% */
   position: absolute;
   padding: 0;
 `
@@ -41,14 +40,6 @@ const InnerBoxImg = styled.img`
 
 export default function CompanyHead({ isMobile, companyID }) {
 
-  const { Meta } = Card;
-
-  const onCardSelect = (e,props) => {
-    const target = props.link || "exit"
-    console.log("Select Card: ", target)
-    // Router.push(`/ranking?id=${target}`,`/ranking/${target}`)
-  }
-
   const Screenshot = props => (
     <Outerbox>
       <OuterboxImg src="/static/laptop2.svg" />
@@ -57,25 +48,22 @@ export default function CompanyHead({ isMobile, companyID }) {
       </InnerBox>
     </Outerbox>
   )
-
-  const Listing = props => (
-    <div>
-    <Col span={2} offset={2}>
-    <Avatar shape="square" size={128}/>
-    </Col>
-    <Col span={12} >
-    <h2>Company Name</h2>
-    <br/>
-    <p>Detailed description of the company should be listed here with some basic data.</p>
-    </Col>
-    </div>
-  )
   
   return (
     <Page1Container>
-      <Listing />
+    <Row>
+      <Col span={2} offset={2}>
+        <Avatar shape="square" size={128}/>
+      </Col>
+      <Col span={14} offset={4}>
+        <h2>Company Name</h2>
+        <br/>
+        <p>Detailed description of the company should be listed here with some basic data.</p>
+        <br />
+      </Col>
+    </Row>
       <Row gutter={20} >
-        <Col span={12} offset={2} >
+        <Col offset={2} >
             <Screenshot image="https://fillmurray.com/900/563" />
         </Col>
       </Row>

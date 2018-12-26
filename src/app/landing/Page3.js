@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link'
 import { Tabs, Row, Col, Table, Tag, Icon } from 'antd';
-import DBQueryProvider from '../components/DBQueryProvider';
+import FirebaseProvider from '../lib/FirebaseProvider';
 import styled from 'styled-components';
 
 const Page3Container = styled.div`
@@ -71,7 +71,7 @@ export default function Page3({ isMobile, batch }) {
             categoryFilter = [filter,['category', '==', category]]
         }
         return (
-        <DBQueryProvider path={'companies'} filter={categoryFilter} sort="name">
+        <FirebaseProvider path={'companies'} filter={categoryFilter} sort="name">
 
         { ({error, isLoading, data}) => {
 
@@ -90,7 +90,7 @@ export default function Page3({ isMobile, batch }) {
         )
         }}
 
-        </DBQueryProvider>
+        </FirebaseProvider>
         )
     }
 
