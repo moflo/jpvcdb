@@ -15,8 +15,8 @@ const FeedbackContainer = styled.div`
   background: #fbfbfb;
   border: 1px solid #d9d9d9;
   border-radius: 6px;
-
 `
+
 const PageHeader = styled.h2`
     padding-bottom: 30px;
 `
@@ -88,7 +88,7 @@ class MessageCreate extends React.Component {
       return (
             <Form onSubmit={this.handleSubmit}>
             <Row gutter={40}>
-                    <Col span={10}>
+                    <Col span={12}>
 
                     <FormItem label="Name">
                         {getFieldDecorator('name', {
@@ -120,7 +120,7 @@ class MessageCreate extends React.Component {
                         </FormItem>
 
                     </Col>
-                    <Col span={14}>
+                    <Col span={12}>
 
 
                         <FormItem label="Message">
@@ -139,14 +139,17 @@ class MessageCreate extends React.Component {
                         </FormItem>
 
                     </Col>
+                    <Col span={24}>
+
+                    <FormItem>
+                        <Button disabled={!this.state.submitVisible} htmlType="submit" style={{ width: "100%", marginTop: 16, backgroundColor: "#000", color: "#fff", borderColor: "#000"}} >
+                        Submit
+                        </Button>
+                    </FormItem>                
+
+                    </Col>
                 </Row>
 
-                <FormItem>
-                    <Button disabled={!this.state.submitVisible} type="primary" htmlType="submit" style={{ marginTop: 16}} >
-                    Submit
-                    </Button>
-                </FormItem>
-                
             </Form>
         )
     }

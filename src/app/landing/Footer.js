@@ -10,7 +10,7 @@ function Footer() {
         <Col lg={6} sm={24} xs={24}>
             <div className="footer-center">
               <h2>
-                <img className="title-icon" src="/static/logo-white.png" alt="" />
+                <img className="title-icon" src="/static/logo-clear.png" alt="" />
                 Mobile Flow LLC
               </h2>
               <div>

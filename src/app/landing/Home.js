@@ -2,7 +2,7 @@ import React from 'react';
 // import DocumentTitle from 'react-document-title';
 // import { enquireScreen } from 'enquire-js';
 import Header from './Header';
-import Banner from './Banner';
+import Banner from '../components/Banner';
 import Page1 from './Page1';
 import Page2 from './Page2';
 import Page3 from './Page3';

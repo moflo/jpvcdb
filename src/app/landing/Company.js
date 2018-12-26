@@ -2,17 +2,12 @@ import React from 'react';
 // import DocumentTitle from 'react-document-title';
 // import { enquireScreen } from 'enquire-js';
 import Header from './Header';
-import Banner from './Banner';
-import CompanyHead from './CompanyHead';
+import BannerMin from '../components/BannerMin';
+import CompanyDetails from '../components/CompanyDetails';
 import Footer from './Footer';
 import './static/style';
 import styled from 'styled-components';
 
-const DebugTitle = styled.h1`
-  text-align: center;
-  margin: 30px;
-  height: 200px;
-`
 
 let isMobile = false;
 // enquireScreen((b) => {
@@ -45,9 +40,8 @@ class Company extends React.PureComponent {
     return (
       [
         <Header key="header" isFirstScreen={this.state.isFirstScreen} isMobile={this.state.isMobile} />,
-        <Banner key="banner" />,
-        // <DebugTitle key="title" >Company Page {this.state.id}</DebugTitle>,
-        <CompanyHead companyID={this.state.id} key="companyhead" />,
+        <BannerMin key="banner" />,
+        <CompanyDetails companyID={this.state.id} key="companyhead" />,
         <Footer key="footer" />
       ]
     );

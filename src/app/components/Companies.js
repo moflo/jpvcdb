@@ -126,7 +126,6 @@ class CompanyCreate extends React.Component {
       if (!err) {
         console.log("handleSubmit values:", JSON.stringify(values))
 
-        /*
         let file = values.landingpage
 
         var hide = message.loading(`Loading... ${file.name}`, this.state.percent);
@@ -180,7 +179,6 @@ class CompanyCreate extends React.Component {
 
         })
 
-        */
 
       }
       else {
@@ -219,11 +217,11 @@ class CompanyCreate extends React.Component {
     callback && callback('Need to add image')
   }
 
+  onChangeIcon = value => { console.log(`changeIcon: ${JSON.stringify(value)}`)}
+
   render() {
     const { getFieldDecorator } = this.props.form;
     const { deploying, loading } = this.state;
-    const { previewVisible, previewImage, fileList } = this.state;
-    const { previewVisibleIcon, previewImageIcon, fileListIcon } = this.state;
     const uploadButton = (
       <div>
         <Icon type="plus" />
@@ -376,7 +374,7 @@ class CompanyCreate extends React.Component {
 
                         {getFieldDecorator('landingpage', {
                             // valuePropName: 'value',
-                            getValueFromEvent: this.normFile,
+                            // getValueFromEvent: this.normFile,
                             initialValue: { file: null },
                             rules: [{ validator: this.validateUpload }]
                             })( <PhotoUpload /> )}
@@ -388,10 +386,10 @@ class CompanyCreate extends React.Component {
 
                           {getFieldDecorator('icon', {
                             // valuePropName: 'value',
-                            getValueFromEvent: this.normFile,
+                            // getValueFromEvent: this.normFile,
                             initialValue: { file: null },
                             rules: [{ validator: this.validateUpload }]
-                            })( <PhotoUpload /> )}
+                            })( <PhotoUpload onChange={this.onChangeIcon}/> )}
 
                         </FormItem>
 
