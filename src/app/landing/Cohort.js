@@ -2,7 +2,7 @@ import React from 'react';
 // import DocumentTitle from 'react-document-title';
 // import { enquireScreen } from 'enquire-js';
 import Header from './Header';
-import Banner from './Banner';
+import BannerMin from '../components/BannerMin';
 import Page3 from './Page3';
 // import Page4 from './Page4';
 import Footer from './Footer';
@@ -42,7 +42,7 @@ class Cohort extends React.PureComponent {
     return (
       [
         <Header key="header" isFirstScreen={this.state.isFirstScreen} isMobile={this.state.isMobile} />,
-        <Banner key="banner" />,
+        <BannerMin key="banner" />,
         <Page3 key="page3" isMobile={this.state.isMobile} batch={batch}/>,
         <Footer key="footer" />
       ]
