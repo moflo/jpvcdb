@@ -5,7 +5,7 @@ import { Card, Row, Col, Table, Tag } from 'antd';
 import FirebaseProvider from '../lib/FirebaseProvider';
 import styled from 'styled-components';
 import dynamic from 'next/dynamic'
-const Map = dynamic(() => import('./Map.js'), {
+const Map = dynamic(() => import('../components/Map.js'), {
   ssr: false
 });
 
@@ -31,6 +31,10 @@ const Page2Container = styled.div`
     border-bottom-color: #f00;
   }
 
+  .map-box {
+    height: 600px;
+  }
+  
   .map-box .mapboxgl-map {
     -webkit-box-shadow: 10px 10px 28px 1px rgba(0,0,0,0.35);
     -moz-box-shadow: 10px 10px 28px 1px rgba(0,0,0,0.35);

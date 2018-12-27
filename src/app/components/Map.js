@@ -7,8 +7,8 @@ import mapboxgl from '../credentials/mapbox'
 
 export default class Map extends React.PureComponent {
   state = {
-    lng: -71.020000,
-    lat: 42.362400,
+    lng: 139.7454,
+    lat: 35.6586,
     zoom: 10.0
   };
 
@@ -36,7 +36,7 @@ export default class Map extends React.PureComponent {
 
   render() {
   return (
-    <div ref={el => this.mapContainer = el} className="absolute top right left bottom" style={{ height: 600 }} />
+    <div ref={el => this.mapContainer = el} className="absolute top right left bottom" style={{ height: "100%" }} />
     );
   }
 }
