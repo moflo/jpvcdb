@@ -4,6 +4,10 @@ import Router from "next/router";
 import { Card, Row, Col, Progress, Icon, Tabs } from 'antd';
 import styled from 'styled-components';
 
+const TabPane = Tabs.TabPane
+const { Meta } = Card;
+
+
 const AnalysisContainer = styled.div`
   padding-top: 30px;
   padding-bottom: 30px;
@@ -44,12 +48,9 @@ const PageHeader = styled.h2`
     padding-bottom: 30px;
 `
 
-const TabPane = Tabs.TabPane
+export default function Analysis({ isMobile, isLoading, data }) {
 
-export default function Analysis({ isMobile, performance }) {
-
-  const perf = performance || {"funding":5.2204930393039,"fundingCat":100,"alexa":52.23,"alexaCat":52.22,"twitter":3.0,"twitterCat":100,"employees":11.2,"employeesCat":42.0,"growth":22.1,"growthCat":82.44};
-  const { Meta } = Card;
+  const perf = data.performance || {"funding":5.2204930393039,"fundingCat":100,"alexa":52.23,"alexaCat":52.22,"twitter":3.0,"twitterCat":100,"employees":11.2,"employeesCat":42.0,"growth":22.1,"growthCat":82.44};
 
   const onCardSelect = (e,props) => {
     const target = props.link || "exit"
@@ -59,6 +60,7 @@ export default function Analysis({ isMobile, performance }) {
 
   const RankingBox = props => (
     <Card hoverable={true} 
+          loading={props.loading}
           title={props.title}
           extra={<Icon type={props.icon}></Icon>} 
           onClick={(e) => { onCardSelect(e,props) } }
@@ -81,13 +83,13 @@ export default function Analysis({ isMobile, performance }) {
           <TabPane tab={<span><Icon type="home" />Performance vs. Cohort</span>} key="1">
 
           <Row type="flex" justify="space-around" align="top">
-            <Col span={10}><RankingBox title="Funding" percent={pt(perf.funding)} info="Investment funding compared to cohort" link="funding" icon="red-envelope">Funding</RankingBox></Col>
-            <Col span={10}><RankingBox title="Exits" percent={pt(perf.exit)} info="Exit value compared to cohort" link="exit" icon="rocket">Exit</RankingBox></Col>
+            <Col span={10}><RankingBox title="Funding" loading={isLoading} percent={pt(perf.funding)} info="Investment funding compared to cohort" link="funding" icon="red-envelope">Funding</RankingBox></Col>
+            <Col span={10}><RankingBox title="Exits" loading={isLoading} percent={pt(perf.exit)} info="Exit value compared to cohort" link="exit" icon="rocket">Exit</RankingBox></Col>
           </Row>
           <br />
           <Row type="flex" justify="space-around" align="top">
-            <Col span={10}><RankingBox title="Employees" percent={pt(perf.employees)} info="Employee count compared to cohort" link="employees" icon="smile">Employees</RankingBox></Col>
-            <Col span={10}><RankingBox title="Alexa Rank" percent={pt(perf.alexa)} info="Alexa rank compared to cohort" link="alexa" icon="compass">Alexa</RankingBox></Col>
+            <Col span={10}><RankingBox title="Employees" loading={isLoading} percent={pt(perf.employees)} info="Employee count compared to cohort" link="employees" icon="smile">Employees</RankingBox></Col>
+            <Col span={10}><RankingBox title="Alexa Rank" loading={isLoading} percent={pt(perf.alexa)} info="Alexa rank compared to cohort" link="alexa" icon="compass">Alexa</RankingBox></Col>
           </Row>
 
           </TabPane>
@@ -95,13 +97,13 @@ export default function Analysis({ isMobile, performance }) {
           <TabPane tab={<span><Icon type="home" />vs. Sector</span>} key="2">
 
           <Row type="flex" justify="space-around" align="top">
-            <Col span={10}><RankingBox title="Funding" percent={pt(perf.fundingCat)} info="Investment funding within same category" link="funding" icon="red-envelope">Funding</RankingBox></Col>
-            <Col span={10}><RankingBox title="Exits" percent={pt(perf.exitCat)} info="Exit value within same category" link="exit" icon="rocket">Exit</RankingBox></Col>
+            <Col span={10}><RankingBox title="Funding" loading={isLoading} percent={pt(perf.fundingCat)} info="Investment funding within same category" link="funding" icon="red-envelope">Funding</RankingBox></Col>
+            <Col span={10}><RankingBox title="Exits" loading={isLoading} percent={pt(perf.exitCat)} info="Exit value within same category" link="exit" icon="rocket">Exit</RankingBox></Col>
           </Row>
           <br />
           <Row type="flex" justify="space-around" align="top">
-            <Col span={10}><RankingBox title="Employees" percent={pt(perf.employeesCat)} info="Employee count within same category" link="employees" icon="smile">Employees</RankingBox></Col>
-            <Col span={10}><RankingBox title="Alexa Rank" percent={pt(perf.alexaCat)} info="Alexa rank within same category" link="alexa" icon="compass">Alexa</RankingBox></Col>
+            <Col span={10}><RankingBox title="Employees" loading={isLoading} percent={pt(perf.employeesCat)} info="Employee count within same category" link="employees" icon="smile">Employees</RankingBox></Col>
+            <Col span={10}><RankingBox title="Alexa Rank" loading={isLoading} percent={pt(perf.alexaCat)} info="Alexa rank within same category" link="alexa" icon="compass">Alexa</RankingBox></Col>
           </Row>
 
           </TabPane>
@@ -112,5 +114,6 @@ export default function Analysis({ isMobile, performance }) {
 }
 Analysis.propTypes = {
   isMobile: PropTypes.bool,
-  performance: PropTypes.object
+  isLoading: PropTypes.bool,
+  data: PropTypes.object,
 };
