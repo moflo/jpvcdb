@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col, Avatar, Icon } from 'antd';
+import { Row, Col, Avatar, Tag } from 'antd';
 import styled from 'styled-components';
 
 const Page1Container = styled.div`
@@ -38,7 +38,7 @@ const InnerBoxImg = styled.img`
 `
 
 
-export default function CompanyHead({ isMobile, companyID }) {
+export default function CompanyHead({ isMobile, isLoading, data }) {
 
   const Screenshot = props => (
     <Outerbox>
@@ -49,22 +49,37 @@ export default function CompanyHead({ isMobile, companyID }) {
     </Outerbox>
   )
   
+  const name = isLoading ? 'Loading Company...' : data.name
+  const avatarURL = isLoading ? '' : data.logo
+  const avatar = avatarURL == '' ? name : null
+  const description = isLoading ? 'Loading company description...' : data.description
+  const landingURL = isLoading ? 'https://via.placeholder.com/900x563' : (data.landingpage == '' ? 'https://fillmurray.com/900/563' : data.landingpage)
+
+  const tag = isLoading ? 'Unknown' : data.status
+  const colorForStatus = status => {
+    if (status.match(/live/i)) return "#ffc108" // yellow
+    if (status.match(/dead/i)) return "#dc3545" // red
+    if (status.match(/exit/i)) return "#28a745"  // green
+    return "gray"
+}
+
+
   return (
     <Page1Container>
     <Row>
       <Col span={2} offset={2}>
-        <Avatar shape="square" size={128}/>
+        <Avatar url={avatarURL} shape="square" size={128}>{avatar}</Avatar>
       </Col>
       <Col span={14} offset={4}>
-        <h2>Company Name</h2>
+        <h2>{name}</h2>
         <br/>
-        <p>Detailed description of the company should be listed here with some basic data.</p>
+        <p>{description} <Tag color={colorForStatus(tag)} key={tag} >{tag.toUpperCase()}</Tag></p>
         <br />
       </Col>
     </Row>
       <Row gutter={20} >
         <Col offset={2} >
-            <Screenshot image="https://fillmurray.com/900/563" />
+            <Screenshot image={landingURL} />
         </Col>
       </Row>
     </Page1Container>
@@ -72,4 +87,6 @@ export default function CompanyHead({ isMobile, companyID }) {
 }
 CompanyHead.propTypes = {
   isMobile: PropTypes.bool,
+  isLoading: PropTypes.bool,
+  data: PropTypes.object,
 };

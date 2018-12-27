@@ -11,19 +11,13 @@ const ContactSection = styled.div`
 `
 
 
-export default function CompanyContact({ isMobile, companyID }) {
+export default function CompanyContact({ isMobile, isLoading, data }) {
 
-  const { Meta } = Card;
-
-  const onCardSelect = (e,props) => {
-    const target = props.link || "exit"
-    console.log("Select Card: ", target)
-    // Router.push(`/ranking?id=${target}`,`/ranking/${target}`)
-  }
+const www = isLoading ? 'https://jpvcdb.co' : data.www
   
   return (
     <ContactSection>
-        <Button type="primary" icon="link">Open the Company Website</Button>
+        <Button type="primary" icon="link" href={www}>Open the Company Website</Button>
         <br />
         <br />
 
@@ -51,5 +45,7 @@ export default function CompanyContact({ isMobile, companyID }) {
     );
 }
 CompanyContact.propTypes = {
-  isMobile: PropTypes.bool,
-};
+    isMobile: PropTypes.bool,
+    isLoading: PropTypes.bool,
+    data: PropTypes.object,
+  };

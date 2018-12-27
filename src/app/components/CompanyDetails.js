@@ -5,7 +5,7 @@ import { Card, Row, Col, Avatar, Button, Icon } from 'antd';
 import FirebaseProvider from '../lib/FirebaseProvider';
 import CompanyAnalysis from './CompanyAnalysis';
 import CompanyFeedback from './Feedback';
-import CompanyHead from './Masthead';
+import Masthead from './Masthead';
 import CompanyContact from './Contact';
 import styled from 'styled-components';
 
@@ -32,23 +32,26 @@ export default function CompanyDetails({ isMobile, companyID }) {
 
 
   return (
-          <FirebaseProvider path={'messages'} >
+          <FirebaseProvider path={'companies'} filter={['id', '==', companyID]} limit={1} >
 
             { ({error, isLoading, data}) => {
 
               if (error) { console.error("Error loading users ", error)}
               
+              const co = data[0] || {}
+              const name = isLoading ? 'Loading Company...' : co.name
+
               return(
                 <Page1Container>
-                <PageHeader>Company {companyID}</PageHeader> 
+                <PageHeader>{name}</PageHeader> 
                   <Row gutter={20} align="top" style={{ paddingBottom: 30 }}>
                     <Col span={12} offset={2} >
-                        <CompanyHead icon="https://via.placeholder/com/128x128" />
-                        <CompanyAnalysis key="analysis" />
+                        <Masthead isLoading={isLoading} data={co} />
+                        <CompanyAnalysis isLoading={isLoading} data={co} />
                         <CompanyFeedback companyID={companyID} key="feedback" />
                     </Col>
                     <Col span={8} offset={1}>
-                        <CompanyContact />
+                        <CompanyContact isLoading={isLoading} data={co} />
                     </Col>
                   </Row>
                   </Page1Container>
