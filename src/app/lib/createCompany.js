@@ -37,8 +37,15 @@ const createCompany = values => {
     hqLocation: "",
     founderBackground: [
     ],
-    links: 0
-  }
+    links: 0,
+    performance: {
+      funding:0.0,fundingCat:100,
+      employees:0.0,employeesCat:100.0,
+      growth:0.0,growthCat:100.0,
+      alexa:0.0,alexaCat:100.0,
+      twitter:0.0,twitterCat:100
+    }
+}
 
   return firebaseManager.sharedInstance.firestore()
     .collection('companies')

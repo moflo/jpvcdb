@@ -68,9 +68,9 @@ export default function CompanyHead({ isMobile, isLoading, data }) {
     <Page1Container>
     <Row>
       <Col span={2} offset={2}>
-        <Avatar url={avatarURL} shape="square" size={128}>{avatar}</Avatar>
+        <Avatar url={avatarURL} shape="square" size={75}>{avatar}</Avatar>
       </Col>
-      <Col span={14} offset={4}>
+      <Col span={14} offset={2}>
         <h2>{name}</h2>
         <br/>
         <p>{description} <Tag color={colorForStatus(tag)} key={tag} >{tag.toUpperCase()}</Tag></p>

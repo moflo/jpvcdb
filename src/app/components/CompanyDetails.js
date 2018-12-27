@@ -43,12 +43,12 @@ export default function CompanyDetails({ isMobile, companyID }) {
 
               return(
                 <Page1Container>
-                <PageHeader>{name}</PageHeader> 
+                <PageHeader>{}</PageHeader> 
                   <Row gutter={20} align="top" style={{ paddingBottom: 30 }}>
                     <Col span={12} offset={2} >
                         <Masthead isLoading={isLoading} data={co} />
                         <CompanyAnalysis isLoading={isLoading} data={co} />
-                        <CompanyFeedback companyID={companyID} key="feedback" />
+                        <CompanyFeedback companyID={companyID} />
                     </Col>
                     <Col span={8} offset={1}>
                         <CompanyContact isLoading={isLoading} data={co} />
@@ -64,4 +64,5 @@ export default function CompanyDetails({ isMobile, companyID }) {
 }
 CompanyDetails.propTypes = {
   isMobile: PropTypes.bool,
+  companyID: PropTypes.string,
 };
