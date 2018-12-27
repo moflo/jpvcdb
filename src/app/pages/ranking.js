@@ -1,6 +1,6 @@
 import * as React from 'react'
 import App from '../components/App'
-import Ranking from '../landing/Ranking'
+import Ranking from '../layout/Ranking'
 import Head from 'next/head'
 
 

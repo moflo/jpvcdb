@@ -1,6 +1,6 @@
 import * as React from 'react'
 import App from '../components/App'
-import Cohort from '../landing/Cohort'
+import Cohort from '../layout/Cohort'
 import Head from 'next/head'
 
 

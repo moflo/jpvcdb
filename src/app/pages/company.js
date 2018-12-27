@@ -1,6 +1,6 @@
 import * as React from 'react'
 import App from '../components/App'
-import Company from '../landing/Company'
+import Company from '../layout/Company'
 import Head from 'next/head'
 
 const company = ({ id }) => (

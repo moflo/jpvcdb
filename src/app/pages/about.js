@@ -1,6 +1,6 @@
 import * as React from 'react'
 import App from '../components/App'
-import About from '../landing/About'
+import About from '../layout/About'
 import Head from 'next/head'
 
 export default () => (
