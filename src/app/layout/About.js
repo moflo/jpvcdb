@@ -2,7 +2,7 @@ import React from 'react';
 // import DocumentTitle from 'react-document-title';
 // import { enquireScreen } from 'enquire-js';
 import { Layout, Menu, Icon, Card } from 'antd';
-import Header from './Header';
+import Header from '../components/Header';
 import './static/style';
 
 

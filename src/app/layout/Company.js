@@ -1,10 +1,10 @@
 import React from 'react';
 // import DocumentTitle from 'react-document-title';
 // import { enquireScreen } from 'enquire-js';
-import Header from './Header';
+import Header from '../components/Header';
 import BannerMin from '../components/BannerMin';
 import CompanyDetails from '../components/CompanyDetails';
-import Footer from './Footer';
+import Footer from '../components/Footer';
 import './static/style';
 import styled from 'styled-components';
 

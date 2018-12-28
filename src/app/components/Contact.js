@@ -19,9 +19,9 @@ const MapBox = props => <div className="map-box"><h2>{props.title}</h2>{props.ch
 export default function CompanyContact({ isMobile, isLoading, data }) {
 
   const www = isLoading ? 'https://jpvcdb.co' : data.www
-  const address = isLoading ? <Skeleton paragraph={false} /> : data.address
-  const city = isLoading ? <Skeleton paragraph={false} /> : data.city
-  const zip = isLoading ? <Skeleton paragraph={false} /> : data.zip
+  const address = isLoading ? <Skeleton paragraph={false} /> : <p>{data.address}</p>
+  const city = isLoading ? <Skeleton paragraph={false} /> : <p>{data.city}</p>
+  const zip = isLoading ? <Skeleton paragraph={false} /> : <p>{data.zip}</p>
   const twitter = data.twitterID || 'https://twitter.com/jpvcdb'
   const facebook = data.facebookID || 'https://facebook.com/'
   const coord = data.coordinates || { lng: 139.7454, lat: 35.6586 }
@@ -31,7 +31,6 @@ export default function CompanyContact({ isMobile, isLoading, data }) {
         <Button type="primary" icon="link" href={www}>Open the Company Website</Button>
         <br />
         <br />
-
         <h2>Social</h2>
         <div style={{ margin: 10, paddingLeft: 20 }}>
             <Button shape="circle" icon="twitter" href={twitter} />
@@ -42,9 +41,9 @@ export default function CompanyContact({ isMobile, isLoading, data }) {
         <br />
         <h2>Address</h2>
         <div style={{ margin: 10, paddingLeft: 20 }}>
-            <p>{address}</p>
-            <p>{city}</p>
-            <p>{zip}</p>
+            <div>{address}</div>
+            <div>{city}</div>
+            <div>{zip}</div>
         </div>
         
         <br />

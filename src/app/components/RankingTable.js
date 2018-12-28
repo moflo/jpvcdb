@@ -65,7 +65,7 @@ class RankingTable extends React.PureComponent {
                 title: 'Name',
                 dataIndex: 'name',
                 key: 'name',
-                render: ((text) => <Link href={`/company?id=`+text} as={`/company/`+text}><a>{text}</a></Link>),
+                render: ((text,record) => <Link href={`/company?id=`+record.id} as={`/company/`+record.id}><a>{text}</a></Link>),
             }
 
             const funding_col = {
@@ -206,7 +206,7 @@ class RankingTable extends React.PureComponent {
                 dataSource={data} 
                 rowKey={record => record.id}
                 onRow={(record) => ({
-                    onClick: () => { onRowSelect(record); }
+                    onClick: () => { this.onRowSelect(record); }
                 })}
                 loading={isLoading} 
                 pagination={true} />

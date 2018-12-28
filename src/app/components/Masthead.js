@@ -49,14 +49,16 @@ export default function CompanyHead({ isMobile, isLoading, data }) {
     </Outerbox>
   )
   
+  
   const name = isLoading ? 'Loading Company...' : data.name
   const avatarURL = isLoading ? '' : data.logo
   const avatar = avatarURL == '' ? name : null
   const description = isLoading ? 'Loading company description...' : data.description
   const landingURL = isLoading ? 'https://via.placeholder.com/900x563' : (data.landingpage == '' ? 'https://fillmurray.com/900/563' : data.landingpage)
 
-  const tag = isLoading ? 'Unknown' : data.status
+  const tag = isLoading ? 'Unknown' : data.status == '' ? 'Unknown' : data.status
   const colorForStatus = status => {
+    if (!status) return "gray"
     if (status.match(/live/i)) return "#ffc108" // yellow
     if (status.match(/dead/i)) return "#dc3545" // red
     if (status.match(/exit/i)) return "#28a745"  // green

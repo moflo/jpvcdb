@@ -1,11 +1,11 @@
 import React from 'react';
 // import DocumentTitle from 'react-document-title';
 // import { enquireScreen } from 'enquire-js';
-import Header from './Header';
-import Banner from './Banner';
-import RankingTable from './RankingTable';
+import Header from '../admin/Header';
+import BannerMin from '../components/BannerMin';
+import RankingTable from '../components/RankingTable';
 // import Page4 from './Page4';
-import Footer from './Footer';
+import Footer from '../components/Footer';
 import './static/style';
 import styled from 'styled-components';
 
@@ -42,7 +42,7 @@ class Ranking extends React.PureComponent {
     return (
       [
         <Header key="header" isFirstScreen={this.state.isFirstScreen} isMobile={this.state.isMobile} />,
-        <Banner key="banner" />,
+        <BannerMin key="banner" />,
         <RankingTable key="ranking" isMobile={this.state.isMobile} sort={sort}/>,
         <Footer key="footer" />
       ]

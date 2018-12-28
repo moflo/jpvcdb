@@ -5,7 +5,7 @@ import { Card, Row, Col, Table, Tag } from 'antd';
 import FirebaseProvider from '../lib/FirebaseProvider';
 import styled from 'styled-components';
 import dynamic from 'next/dynamic'
-const Map = dynamic(() => import('../components/Map.js'), {
+const Map = dynamic(() => import('./Map.js'), {
   ssr: false
 });
 

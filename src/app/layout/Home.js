@@ -1,13 +1,13 @@
 import React from 'react';
 // import DocumentTitle from 'react-document-title';
 // import { enquireScreen } from 'enquire-js';
-import Header from './Header';
+import Header from '../components/Header';
 import Banner from '../components/Banner';
-import Page1 from './Page1';
-import Page2 from './Page2';
-import Page3 from './Page3';
+import Page1 from '../components/Page1';
+import Page2 from '../components/Page2';
+import Page3 from '../components/Page3';
 // import CompanyHead from './CompanyHead';
-import Footer from './Footer';
+import Footer from '../components/Footer';
 import './static/style';
 import styled from 'styled-components';
 

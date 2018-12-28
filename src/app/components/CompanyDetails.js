@@ -36,8 +36,10 @@ export default function CompanyDetails({ isMobile, companyID }) {
 
             { ({error, isLoading, data}) => {
 
-              if (error) { console.error("Error loading users ", error)}
+              if (error) { console.error("Error loading company ", error)}
               
+              // console.log(`CompanyDetails: [${companyID}] ${JSON.stringify(data)}`)
+
               const co = data[0] || {}
               const name = isLoading ? 'Loading Company...' : co.name
 

@@ -1,11 +1,11 @@
 import React from 'react';
 // import DocumentTitle from 'react-document-title';
 // import { enquireScreen } from 'enquire-js';
-import Header from './Header';
+import Header from '../components/Header';
 import BannerMin from '../components/BannerMin';
-import Page3 from './Page3';
+import Page3 from '../components/Page3';
 // import Page4 from './Page4';
-import Footer from './Footer';
+import Footer from '../components/Footer';
 import './static/style';
 import styled from 'styled-components';
 

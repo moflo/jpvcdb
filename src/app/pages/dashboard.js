@@ -3,10 +3,10 @@ import App from '../components/App'
 import { Menu, Icon, Layout, Breadcrumb, Skeleton} from 'antd';
 import styled from 'styled-components';
 import { redirectIfNotAuthenticated } from "../lib/auth";
-import MFHeader from '../components/Header';
-import MFUsers from '../components/Users';
-import MFMessages from '../components/Messages';
-import MFCompanies from '../components/Companies';
+import MFHeader from '../admin/Header';
+import MFUsers from '../admin/Users';
+import MFMessages from '../admin/Messages';
+import MFCompanies from '../admin/Companies';
 
 const { SubMenu } = Menu;
 const { Content, Footer, Sider } = Layout;
