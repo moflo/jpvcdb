@@ -24,6 +24,7 @@ export default function CompanyContact({ isMobile, isLoading, data }) {
   const zip = isLoading ? <Skeleton paragraph={false} /> : data.zip
   const twitter = data.twitterID || 'https://twitter.com/jpvcdb'
   const facebook = data.facebookID || 'https://facebook.com/'
+  const coord = data.coordinates || { lng: 139.7454, lat: 35.6586 }
 
   return (
     <ContactSection>
@@ -50,7 +51,7 @@ export default function CompanyContact({ isMobile, isLoading, data }) {
         <br />
         <h2>Location</h2>
         <div style={{ margin: 10, width: 300, height: 300 }}>
-            <Map />
+            <Map lat={coord.lat} lng={coord.lng} />
         </div>
     </ContactSection>
     );

@@ -7,8 +7,8 @@ import mapboxgl from '../credentials/mapbox'
 
 export default class Map extends React.PureComponent {
   state = {
-    lng: 139.7454,
-    lat: 35.6586,
+    lng: this.props.lng || 139.7454,
+    lat: this.props.lat || 35.6586,
     zoom: 10.0
   };
 

@@ -79,7 +79,11 @@ const updateCompany = docObj => {
         ticker: "",
         address: "",
         hqLocation: "",
-        founderCount: 1,
+        coordinates: {
+          lng: 139.7454,
+          lat: 35.6586
+        },
+          founderCount: 1,
         founderBackground: [],
 
         createdAt

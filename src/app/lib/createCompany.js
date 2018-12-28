@@ -35,7 +35,11 @@ const createCompany = values => {
     tweets: 0,
     employees: 1,
     hqLocation: "",
-    founderBackground: [
+    coordinates: {
+      lng: 139.7454,
+      lat: 35.6586
+    },
+  founderBackground: [
     ],
     links: 0,
     performance: {

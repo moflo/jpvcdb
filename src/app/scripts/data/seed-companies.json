@@ -49,6 +49,10 @@
       "landingpage": "",
       "tweets": 0,
       "hqLocation": "",
+      "coordinates": {
+        "lng": 139.7454,
+        "lat": 35.6586
+      },
       "founderBackground": [
         
       ],
@@ -106,6 +110,10 @@
       "tweets": 0,
       "employees": 1,
       "hqLocation": "",
+      "coordinates": {
+        "lng": 139.7454,
+        "lat": 35.6586
+      },
       "founderBackground": [
         
       ],
