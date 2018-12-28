@@ -13,8 +13,7 @@ const Page2Container = styled.div`
   margin-top: 30px;
   margin-bottom: 30px;
 
-  .ant-table {
-    font-size: 16px;
+  .batch-data-table {
     background: #fff;
     padding: 0px;
     border-color: #fff;
@@ -23,7 +22,7 @@ const Page2Container = styled.div`
     box-shadow: 10px 10px 28px 1px rgba(0,0,0,0.35);
   }
 
-  .ant-table-row {
+  .batch-data-table-row {
     height: 18px;
     background: #fff;
     padding: 0px;
@@ -49,6 +48,22 @@ const PageHeader = styled.h1`
 export default function Page2({ isMobile }) {
 
   const MapBox = props => <div className="map-box"><h2>{props.title}</h2>{props.children}</div>;
+
+  const tableCount = data => {
+    const tableItems = data.map((record) =>
+      <tr className="batch-data-table-row">
+      <td style={{ width: "20%"}}>
+        {record.batch}
+      </td>
+      <td style={{ width: "80%"}}>
+      <Tag color={'#f06633'} key='c' style={{width: record.percent+"%"}}>{record.count}</Tag>
+      </td>
+    </tr>
+  );
+    return (
+      <table className="batch-data-table">{tableItems}</table>
+    )
+  }
 
   const columnsCount = [{
     title: 'Batch',
@@ -146,9 +161,10 @@ export default function Page2({ isMobile }) {
                       />
                 </Col>
                 <Col span={7}>
-                  <MapBox title="HQ Location">
+                  {/* <MapBox title="HQ Location">
                     <Map />
-                  </MapBox>
+                  </MapBox> */}
+                  {tableCount(batchData)}
                 </Col>
               </Row>
 
