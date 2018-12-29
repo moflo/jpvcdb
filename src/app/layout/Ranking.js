@@ -1,7 +1,7 @@
 import React from 'react';
 // import DocumentTitle from 'react-document-title';
 // import { enquireScreen } from 'enquire-js';
-import Header from '../admin/Header';
+import Header from '../components/Header';
 import BannerMin from '../components/BannerMin';
 import RankingTable from '../components/RankingTable';
 // import Page4 from './Page4';
