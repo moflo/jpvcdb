@@ -27,6 +27,10 @@ const Page2Container = styled.div`
         background-color: #f5f5f5;
       }
 
+      .ant-tag {
+        margin-right: 1px;
+      }
+
     }
 
   .batch-data-table-row {
@@ -78,7 +82,7 @@ export default function Page2({ isMobile }) {
         {record.batch}
       </td>
       <td style={{ width: "80%"}}>
-      <Tag color={'#f06633'} key='c' style={{width: record.percent+"%"}}>{record.count}</Tag>
+      <Tag color={'#FA4313'} key='c' style={{width: record.percent+"%"}}>{record.count}</Tag>
       </td>
     </tr>
   );
@@ -94,9 +98,9 @@ export default function Page2({ isMobile }) {
         {record.batch}
       </td>
       <td style={{ width: "80%"}}>
-      <Tag color={'#007bff'} key={1} style={{width: (66*record.exited/record.count)+"%"}}>{record.exited}</Tag>
-        <Tag color={'#b8daff'} key={2} style={{width: (66*record.live/record.count)+"%"}}>{record.live}</Tag>
-        <Tag color={'#f06633'} key={3} style={{width: (66*record.dead/record.count)+"%"}}>{record.dead}</Tag>
+      <Tag color={'#027CFC'} key={1} style={{width: (66*record.exited/record.count)+"%"}}>{record.exited}</Tag>
+        <Tag color={'#C5ECFF'} key={2} style={{width: (66*record.live/record.count)+"%", color: "#027CFC"}}>{record.live}</Tag>
+        <Tag color={'#FA4313'} key={3} style={{width: (66*record.dead/record.count)+"%"}}>{record.dead}</Tag>
       </td>
     </tr>
   );
@@ -113,9 +117,9 @@ export default function Page2({ isMobile }) {
         {record.batch}
       </td>
       <td style={{ width: "80%"}}>
-        <Tag color={'#007bff'} key={1} style={{width: (55*record.mega/record.count)+"%"}}>{record.mega}</Tag>
-        <Tag color={'#b8daff'} key={2} style={{width: (55*record.mini/record.count)+"%"}}>{record.mini}</Tag>
-        <Tag color={'#f06633'} key={3} style={{width: (55*record.seed/record.count)+"%"}}>{record.seed}</Tag>
+        <Tag color={'#027CFC'} key={1} style={{width: (55*record.mega/record.count)+"%"}}>{record.mega}</Tag>
+        <Tag color={'#C5ECFF'} key={2} style={{width: (55*record.mini/record.count)+"%", color: "#027CFC"}}>{record.mini}</Tag>
+        <Tag color={'#FA4313'} key={3} style={{width: (55*record.seed/record.count)+"%"}}>{record.seed}</Tag>
         <Tag color={'#eeeee'} key={4} style={{width: (55*record.none/record.count)+"%"}}>{record.none}</Tag>
       </td>
     </tr>
