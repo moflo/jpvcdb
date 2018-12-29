@@ -142,10 +142,12 @@ export default function Page2({ isMobile }) {
               <Row type="flex" justify="space-around" align="top">
                 <Col span={7}>
                   <h2>Companies by Cohort</h2>
+                  <p>Number of companies founded by cohort year.</p>
                   {tableCount(batchData)}
                 </Col>
                 <Col span={7}>
                     <h2>Status Outcome by Cohort</h2>
+                    <p>Outcome grouped by <Tag color={'#027CFC'}>Exited</Tag>, <Tag color={'#C5ECFF'} style={{color: "#027CFC"}}>Live</Tag> and <Tag color={'#FA4313'}>Dead</Tag>.</p>
                     {tableStatus(batchData)}
                 </Col>
                 <Col span={7}>
@@ -153,6 +155,7 @@ export default function Page2({ isMobile }) {
                     <Map />
                   </MapBox> */}
                   <h2>Funding by Cohort</h2>
+                  <p>Total funding grouped by <Tag color={'#027CFC'}>>10MM</Tag>, <Tag color={'#C5ECFF'} style={{color: "#027CFC"}}>5~10MM</Tag> and <Tag color={'#FA4313'}>0~5MM</Tag>.</p>
                   {tableFunding(batchData)}
                 </Col>
               </Row>
