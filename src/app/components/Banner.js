@@ -7,8 +7,23 @@ import algoliasearch from 'algoliasearch';
 const algoliaAccount = require('../credentials/algoliaAccountKey.json')
 var client = algoliasearch(algoliaAccount.app_id, algoliaAccount.api_key);
 var algolia = client.initIndex('companies');
+import styled from 'styled-components';
 
 
+const SearchContainer = styled.div`
+  margin-top: 30px;
+  
+  .ant-select-selection {
+    background: #FF6464;
+    border: 1px solid #C80018;
+    color: #ffffff;
+  }
+  
+  .ant-select-selection__placeholder {
+    color: #ffffff;
+  }
+  
+`
 const Option = Select.Option;
 
 class Banner extends React.PureComponent {
@@ -65,7 +80,7 @@ class Banner extends React.PureComponent {
     <section className="page banner-wrapper">
         <div className="banner-text-wrapper" >
           <h2>JP.VC.DB</h2>
-          <div key="button1" className="start-buttonXXX clearfix">
+          <SearchContainer key="button1" className="start-buttonXXX clearfix">
 
             <Select className="banner-search"
               showSearch
@@ -84,7 +99,7 @@ class Banner extends React.PureComponent {
             <br />
             <Link href='/'><Button className="banner-button-dark">Random Company</Button></Link>
             <Link href='/'><Button className="banner-button-light">Suggest a New Company</Button></Link>
-          </div>
+          </SearchContainer>
         </div>
     </section>
   );
