@@ -102,7 +102,7 @@ class Dashboard extends React.Component {
 
 const LogoContainer = styled.div`
     height: 80px;
-    background: url("/static/logo-word-white.png") no-repeat center;
+    background: url("/static/logo-clear.png") no-repeat center;
     background-color: #002140;
     margin: 0px;
 `
