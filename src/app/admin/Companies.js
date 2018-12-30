@@ -414,7 +414,14 @@ export default class MFCompanies extends React.Component {
   state = {
     deploying: false,
     menuVisible: false,
-    loading: false
+    loading: false,
+    limit: 10
+  }
+
+  handleLoadMore = () => {
+    this.setState({
+      limit: this.state.limit + 10
+    })
   }
 
   handleShowMenu = () => {
@@ -441,7 +448,7 @@ export default class MFCompanies extends React.Component {
   }
 
   render() {
-    const { deploying, loading } = this.state;
+    const { deploying, loading, limit } = this.state;
     const WrappedCompanyCreate = Form.create()(CompanyCreate);
 
     const colorForStatus = status => {
@@ -491,8 +498,9 @@ export default class MFCompanies extends React.Component {
           <div style={{textAlign: 'right'}} >
           <Button type="secondary" size="large" icon="plus" onClick={this.handleShowMenu}> New Company </Button>
           </div>
+          <br />
           
-          <FirebaseProvider path={'companies'} limit={10} >
+          <FirebaseProvider path={'companies'} limit={limit} >
 
           { ({error, isLoading, data}) => {
           
@@ -513,6 +521,10 @@ export default class MFCompanies extends React.Component {
 
           </FirebaseProvider>
           
+          <div style={{textAlign: 'right'}} >
+          <Button type="secondary" size="small" icon="plus" onClick={this.handleLoadMore}> Load More </Button>
+          </div>
+
         </div>
         }
       </Content>
