@@ -90,9 +90,6 @@ export default class Header extends React.Component {
     // });
 
     const menu = [
-      <a className="header-lang-button" ghost="true" size="small" key="lang">
-        🇯🇵
-      </a>,
       <Menu mode={menuMode} defaultSelectedKeys={[selectedMenu]} id="nav" key="nav">
         <Menu.Item key="home">
             <Col span={4}>
@@ -112,6 +109,11 @@ export default class Header extends React.Component {
             </Select>
             <Icon className="header-search-icon" type="search" />
           </Col>
+        </Menu.Item>
+        <Menu.Item>
+        <a ghost="true" size="small" key="lang" style={{ fontSize: 32, marginLeft: 2 }}>
+              🇯🇵
+            </a>
         </Menu.Item>
       </Menu>,
     ];
