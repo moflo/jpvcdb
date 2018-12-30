@@ -1,11 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // import classNames from 'classnames';
-import { Menu, Row, Col, Icon, Button, Popover, Select } from 'antd';
+import { Menu, Row, Col, Icon, Spin, Popover, Select } from 'antd';
 import Link from 'next/link'
+import Router from "next/router";
+import algoliasearch from 'algoliasearch';
+const algoliaAccount = require('../credentials/algoliaAccountKey.json')
+var client = algoliasearch(algoliaAccount.app_id, algoliaAccount.api_key);
+var algolia = client.initIndex('companies');
+import styled from 'styled-components';
 
+const Option = Select.Option;
 
-const searchEngine = 'Google';
 
 export default class Header extends React.Component {
   static propTypes = {
@@ -14,8 +20,11 @@ export default class Header extends React.Component {
   }
   state = {
     menuVisible: false,
-    selectedMenu: this.props.selectedMenu || "home"
+    selectedMenu: this.props.selectedMenu || "home",
+    data: [],
+    fetching: false
   };
+
   onMenuVisibleChange = (visible) => {
     this.setState({
       menuVisible: visible,
@@ -33,15 +42,47 @@ export default class Header extends React.Component {
     });
   }
 
-  handleSelectFilter = (value, option) => {
-    const optionValue = option.props['data-label'];
-    return optionValue === searchEngine ||
-      optionValue.indexOf(value.toLowerCase()) > -1;
+
+  searchDone = (err, content) => {
+    if (err) console.log('searchDone, error: '+ err )
+
+    const data = content.hits.map( co => ({
+      name: `${co.name} - ${co.description}`,
+      key: co.objectID,
+    }));
+
+    this.setState({ data, fetching: false });
+  }
+
+  handleSearch = (value) => {
+    console.log('fetching company', value);
+    this.setState({ data: [], fetching: true });
+    algolia.search({
+      query: value,
+      hitsPerPage: 10
+    }, 
+      this.searchDone
+    )
+  }
+
+  handleChange = (value) => {
+    this.setState({
+      value,
+      data: [],
+      fetching: false,
+    });
+  }
+
+  onSelect = (value) => {
+    console.log(value)
+    Router.push('/company?id='+value,'/company/'+value)
   }
 
   render() {
     const { isFirstScreen, isMoblie } = this.props;
     const { menuVisible, selectedMenu } = this.state;
+    const { fetching, data, value } = this.state;
+
     const menuMode = isMoblie ? 'inline' : 'horizontal';
     // const headerClassName = classNames({
     //   clearfix: true,
@@ -59,12 +100,15 @@ export default class Header extends React.Component {
               showSearch
               placeholder="Seach companies"
               showArrow={false}
+              defaultOpen={false}
               filterOption={false}
-              // onSearch={this.handleSearch}
-              // onChange={this.handleChange}
-              notFoundContent={null}
+              onSearch={this.handleSearch}
+              onChange={this.handleChange}
+              onSelect={this.onSelect}
+              notFoundContent={fetching ? <Spin size="small" /> : null}
               style={{ height: 40 }}
-              >
+            >
+              {data.map(d => <Option key={d.key}><Link href={`/company?id=`+d.key} as={`/company/`+d.key}><a>{d.name}</a></Link></Option>)}
             </Select>
             <Icon className="header-search-icon" type="search" />
           </Col>
