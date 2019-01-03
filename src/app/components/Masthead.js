@@ -70,7 +70,7 @@ export default function CompanyHead({ isMobile, isLoading, data }) {
     <Page1Container>
     <Row>
       <Col span={2} offset={2}>
-        <Avatar url={avatarURL} shape="square" size={75}>{avatar}</Avatar>
+        <Avatar src={avatarURL} shape="square" size={75}>{avatar}</Avatar>
       </Col>
       <Col span={14} offset={2}>
         <h2>{name}</h2>
