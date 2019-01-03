@@ -149,3 +149,9 @@ The application page is `dashboard` and contains custom application components f
 
 Both the application and landing page use the `@zeit/next-less` loading methods as specified within `next.config.js` file, which loads the default Ant Design style sheets and applies overrides using the files contained within `asserts/antd-custom.less`.
 
+
+### TODO
+
+1. Clean up admin CRUD functions, issues with AntD image uploader component within forms
+2. Add [i18next language support](https://react.i18next.com) using HOC for AntD
+3. Populate data with Japanese startup cohort data
