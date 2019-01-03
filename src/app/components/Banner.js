@@ -73,6 +73,12 @@ class Banner extends React.PureComponent {
     Router.push('/company?id='+value,'/company/'+value)
   }
 
+  selectRandomCo = () => {
+    let companies = ["airbnb","aalo","aerones","airship","beanstalk"]
+    let co = companies[Math.floor(Math.random()*companies.length)];
+    this.onSelect(co)
+  }
+
   render() {
     const { fetching, data, value } = this.state;
 
@@ -97,8 +103,8 @@ class Banner extends React.PureComponent {
               {data.map(d => <Option key={d.key}><Link href={`/company?id=`+d.key} as={`/company/`+d.key}><a>{d.name}</a></Link></Option>)}
             </Select>
             <br />
-            <Link href='/'><Button className="banner-button-dark">Random Company</Button></Link>
-            <Link href='/'><Button className="banner-button-light">Suggest a New Company</Button></Link>
+            <Button className="banner-button-dark" onClick={this.selectRandomCo}>Random Company</Button>
+            <a href='https://airtable.com/shrbeNwGIqYG3cFHB' target="_blank" rel="noopener noreferrer"><Button className="banner-button-light">Suggest a New Company</Button></a>
           </SearchContainer>
         </div>
     </section>
