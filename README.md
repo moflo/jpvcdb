@@ -3,9 +3,13 @@ JP.VC.DB
 
 ### MobileFlow Next Firebase Ant Design Template
 
-An open source clone the very popular [ycdb](https://ycdb.co) and extends it for other organizations or, in
-this case, whole countries. SEO optimized, performant, opinionated React/Next/AntDesign/Firebase template 
-app with fast loading landing page with lazy-loading of Firebase data using a simple provider class.
+An open source clone the very popular [ycdb](https://ycdb.co) to encourage similary investment visibility and anlaysis
+for other investment organizations or, in our case, whole countries. SEO optimized, performant, opinionated React/Next/AntDesign/Firebase template app with fast loading landing page with lazy-loading of Firebase data 
+using a simple provider class.
+
+<p align="center">
+  <img width="80%" src="./jpvcdb-landing-full.jpg">
+</p>
 
 With code and inspiration from Sam Lolla [Firefly](http://getfirefly.org/) and [react-firestore](https://github.com/green-arrow/react-firestore/blob/master/src/FirestoreCollection.js), with design support from [ManyPixkes](https://manypixels.co/).
 
