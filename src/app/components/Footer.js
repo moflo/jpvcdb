@@ -121,7 +121,7 @@ function Footer() {
             </a>
           </span>
           <span style={{ marginRight: 12 }}>Copyright</span>
-          <span style={{ marginRight: 12 }}> © 2018 Mobile Flow LLC</span>
+          <span style={{ marginRight: 12 }}> © 2018-2019 Mobile Flow LLC</span>
         </Col>
       </Row>
     </footer>

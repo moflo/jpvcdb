@@ -89,7 +89,7 @@ class Dashboard extends React.Component {
                     }
 
                     <Footer style={{ textAlign: 'center' }}>
-                         ©2018 Mobile Flow LLC
+                         ©2018-2019 Mobile Flow LLC
                     </Footer>
                     </Layout>
                 </Layout>
