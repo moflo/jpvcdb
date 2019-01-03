@@ -415,7 +415,8 @@ export default class MFCompanies extends React.Component {
     deploying: false,
     menuVisible: false,
     loading: false,
-    limit: 10
+    limit: 10,
+    fields: {}    // Form props, same as record
   }
 
   handleLoadMore = () => {
@@ -442,13 +443,19 @@ export default class MFCompanies extends React.Component {
     });
   }
 
-
-  onRowSelect = record => {
-    console.log("Select record ", record)
+  onEdit = record => {
+    this.setState({
+      fields: record,
+      menuVisible: true
+    })
   }
 
+  onRowSelect = record => {
+    // console.log("Select record ", record)
+    this.onEdit(record)
+  }
   render() {
-    const { deploying, loading, limit } = this.state;
+    const { deploying, loading, limit, fields } = this.state;
     const WrappedCompanyCreate = Form.create()(CompanyCreate);
 
     const colorForStatus = status => {
@@ -462,7 +469,7 @@ export default class MFCompanies extends React.Component {
       title: 'Name',
       dataIndex: 'id',
       key: 'id',
-      render: ((text) => <a href={text} target="_blank" rel="noopener noreferrer">{text}</a>),
+      // render: ((text) => <a href={text} target="_blank" rel="noopener noreferrer">{text}</a>),
     }, {
       title: 'Batch',
       dataIndex: 'batch',
@@ -481,7 +488,7 @@ export default class MFCompanies extends React.Component {
       title: 'Actions',
       // dataIndex: 'databaseURL',
       key: 'edit',
-      render: ((text,record) => <Button.Group type="small" ><Button icon="edit" /><Button icon="delete" /></Button.Group> ),
+      render: ((text,record) => <Button.Group type="small" ><Button icon="edit" onClick={ () => this.onEdit(record) }/><Button icon="delete" /></Button.Group> ),
   }];
 
     return (
@@ -489,9 +496,14 @@ export default class MFCompanies extends React.Component {
         <Breadcrumb style={{ margin: '16px 0' }}>
         <Breadcrumb.Item>Home</Breadcrumb.Item>
         <Breadcrumb.Item>Company</Breadcrumb.Item>
-        </Breadcrumb>
         {this.state.menuVisible ?
-         <WrappedCompanyCreate cancelCallback={this.handleHideMenu} />
+        <Breadcrumb.Item>{this.state.fields.id ? `Edit` : `Create`}</Breadcrumb.Item>
+        : null
+        }
+        </Breadcrumb>
+        
+        {this.state.menuVisible ?
+         <WrappedCompanyCreate {...fields} cancelCallback={this.handleHideMenu} />
         :
         <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
         
