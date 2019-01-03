@@ -5,7 +5,7 @@ JP.VC.DB
 
 An open source clone the very popular [ycdb](https://ycdb.co) to encourage similary investment visibility and anlaysis
 for other investment organizations or, in our case, whole countries. SEO optimized, performant, opinionated React/Next/AntDesign/Firebase template app with fast loading landing page with lazy-loading of Firebase data 
-using a simple provider class.
+using a simple provider class. Demo available [here](https://jpvcdb.firebaseapp.com/).
 
 <p align="center">
   <img width="80%" src="./jpvcdb-landing-full.jpg">
