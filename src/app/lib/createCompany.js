@@ -57,7 +57,8 @@ const createCompany = values => {
     .set(firebaseManager.sharedInstance.prepareDocForCreate(values))
     .then( () => values)
     .catch( error => {
-      alert(`Whoops, couldn't create the post: ${error.message}`)
+      conslole.log(`Error trying to create the company: ${error.message}`)
+      alert(`Error trying to create the company: ${error.message}`)
     })
 }
 

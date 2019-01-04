@@ -456,7 +456,23 @@ export default class MFCompanies extends React.Component {
   }
   render() {
     const { deploying, loading, limit, fields } = this.state;
-    const WrappedCompanyCreate = Form.create()(CompanyCreate);
+    const WrappedCompanyCreate = Form.create({mapPropsToFields(props) {
+      return {
+        name: Form.createFormField({ value: props.name }),
+        description: Form.createFormField({ value: props.description }),
+        batch: Form.createFormField({ value: props.batch }),
+        category: Form.createFormField({ value: props.category }),
+        status: Form.createFormField({ value: props.status }),
+        funding: Form.createFormField({ value: props.funding }),
+        exit: Form.createFormField({ value: props.exit }),
+        employees: Form.createFormField({ value: props.employees }),
+        address: Form.createFormField({ value: props.address }),
+        www: Form.createFormField({ value: props.www }),
+        hqLocation: Form.createFormField({ value: props.hqLocation }),
+        landingpage: Form.createFormField({ value: props.landingpage }),
+        icon: Form.createFormField({ value: props.icon }),
+      };
+    }})(CompanyCreate);
 
     const colorForStatus = status => {
       if (status.match(/live/i)) return "#ffc108" // yellow
