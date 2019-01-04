@@ -23,12 +23,14 @@ class PhotoUpload extends React.Component {
 
   constructor(props) {
     super(props);
+    // console.log(`PhotoUpload, props: ${JSON.stringify(props)}`)
 
     const value = props.value || {};
+    const fileList = props.url ? [{uid: '-1', name: 'image.png', status: 'done', url: props.url}] : []
     this.state = {
       previewVisible: false,
       previewImage: '',
-      fileList: [],
+      fileList: fileList,
       file: value.file,
       percent: 0,
       };
@@ -126,31 +128,46 @@ class CompanyCreate extends React.Component {
       if (!err) {
         console.log("handleSubmit values:", JSON.stringify(values))
 
-        let file = values.landingpage
+        var promises = []
 
-        var hide = message.loading(`Loading... ${file.name}`, this.state.percent);
+        let landingFile = values.landingpage
 
-        firebaseManager.sharedInstance.uploadFile(file,'landingpage.png',this.uploadProgress)
+        var hide = message.loading(`Loading... ${landingFile.name || landingFile}`, this.state.percent);
+
+        if (typeof(landingFile) === "string") { 
+          promises.push( Promise.resolve(landingFile) )
+        }
+        else {
+          // Note the validateFields values for uploads returns an rc-upload object, https://www.npmjs.com/package/rc-upload
+          // The JS File object is therefore landingFile.file
+          let uploadLanding = firebaseManager.sharedInstance.uploadFile(landingFile.file,'landingpage.png',this.uploadProgress)
+          promises.push( uploadLanding )
+        }
+
+        let iconFile = values.icon
+
+        var hide2 = message.loading(`Loading icon... ${iconFile.name || iconFile}`, this.state.percent);
+
+        if (typeof(iconFile) === "string") {  
+          promises.push( Promise.resolve(iconFile) )
+        }
+        else {
+          // Note the validateFields values for uploads returns an rc-upload object, https://www.npmjs.com/package/rc-upload
+          // The JS File object is therefore iconFile.file
+          let uploadIcon = firebaseManager.sharedInstance.uploadFile(iconFile.file,'icon.png',this.uploadProgress)
+          promises.push( uploadIcon )
+        }
+
+        Promise.all(promises)
         .then((result) => {
           console.log("uploadFile result", result)
 
-          values.landingpage = result
+          values.landingpage = result[0]
+          values.icon = result[1]
+          values.logo = result[1]
 
           hide()
-
-          let iconFile = values.icon
-
-          hide = message.loading(`Loading icon... ${iconFile.name}`, this.state.percent);
-
-          return firebaseManager.sharedInstance.uploadFile(iconFile,'icon.png',this.uploadProgress)
-  
-        })
-        .then((result) => {
-          console.log("uploadFile result", result)
-
-          values.icon = result
-
-          hide()
+          hide2()
 
           return createCompany(values)
         })
@@ -176,6 +193,8 @@ class CompanyCreate extends React.Component {
             message: errorCode,
             description: errorMessage
           })
+
+          console.log(`Error saving company: ${errorMessage}`);
 
         })
 
@@ -208,7 +227,7 @@ class CompanyCreate extends React.Component {
 
   // Testing validation
   validateUpload = (rule, value, callback) => {
-    console.log(`validateUpdate: ${JSON.stringify(value)}`)
+    console.log(`validateUpload: ${JSON.stringify(value)}`)
     if (true) {   //(value && value.file) {
       callback();
       return;
@@ -373,11 +392,11 @@ class CompanyCreate extends React.Component {
                         <FormItem label="Landingpage">
 
                         {getFieldDecorator('landingpage', {
-                            // valuePropName: 'value',
+                            valuePropName: 'url',
                             // getValueFromEvent: this.normFile,
                             initialValue: { file: null },
                             rules: [{ validator: this.validateUpload }]
-                            })( <PhotoUpload /> )}
+                            })( <PhotoUpload  /> )}
 
 
                         </FormItem>
@@ -385,7 +404,7 @@ class CompanyCreate extends React.Component {
                         <FormItem label="Icon">
 
                           {getFieldDecorator('icon', {
-                            // valuePropName: 'value',
+                            valuePropName: 'url',
                             // getValueFromEvent: this.normFile,
                             initialValue: { file: null },
                             rules: [{ validator: this.validateUpload }]
@@ -470,7 +489,7 @@ export default class MFCompanies extends React.Component {
         www: Form.createFormField({ value: props.www }),
         hqLocation: Form.createFormField({ value: props.hqLocation }),
         landingpage: Form.createFormField({ value: props.landingpage }),
-        icon: Form.createFormField({ value: props.icon }),
+        icon: Form.createFormField({ value: props.logo}),
       };
     }})(CompanyCreate);
 

@@ -131,6 +131,9 @@ export default class firebaseManager {
             let filenameToUse = name || file.name || 'upload.png'
 
             console.log(`uploadfile, filename: ${filenameToUse}`)
+            console.log(`uploadfile, file type: ${file instanceof File}`)
+            
+            // var blob = new Blob([file], { type: "image/jpeg" });
 
             const task = storageRef.child(filenameToUse).put(file)
 
